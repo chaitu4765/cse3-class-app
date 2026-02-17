@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Teal & Coral Theme - Light & Sophisticated */
+  --bg-main: #F4F0E4;
+  --mesh-1: rgba(44, 82, 130, 0.1);
+  --mesh-2: rgba(83, 125, 150, 0.1);
+  --mesh-3: rgba(236, 143, 141, 0.1);
+
+  --text-primary: #1A365D;
+  --text-secondary: #537D96;
+
+  --glass-bg: rgba(244, 240, 228, 0.85);
+  --glass-border: rgba(44, 82, 130, 0.2);
+  --glass-outline: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 4px 30px rgba(83, 125, 150, 0.1);
+  --glass-blur: 20px;
+
+  --primary: #2C5282;
+  --primary-glow: rgba(44, 82, 130, 0.2);
+  --accent: #EC8F8D;
+
+  --input-bg: rgba(44, 82, 130, 0.05);
+  --input-border: rgba(44, 82, 130, 0.1);
+
+  color-scheme: light;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+/* Mesh Background System */
+.mesh-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background-color: var(--bg-main);
+  transition: background-color 0.5s ease;
+}
+
+.mesh-gradient {
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  background-image:
+    radial-gradient(at 0% 0%, var(--mesh-1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, var(--mesh-2) 0, transparent 50%),
+    radial-gradient(at 50% 100%, var(--mesh-3) 0, transparent 50%);
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: mesh-float 20s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(5%, 5%) rotate(5deg);
+  }
+}
+
+/* Enhanced High-End Glass Card */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  border: 1px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
+  border-radius: 1.5rem;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Inner highlight for glass effect depth */
+.glass-card {
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+}
+
+[data-theme='dark'] .glass-card {
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 40px 60px -15px rgba(44, 62, 80, 0.1);
+  border-color: var(--accent);
+}
+
+/* Input Styles Refinement */
+input,
+select,
+textarea {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-primary);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: white;
+  box-shadow: 0 0 0 4px var(--primary-glow);
+  transform: translateY(-1px);
+}
+
+/* Button Refinement - Ghost to Filled Transition */
+.btn-primary {
+  background: var(--primary);
+  border: 1.5px solid var(--primary);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 1rem 2.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px -6px var(--primary-glow);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -4px var(--primary-glow);
+  border-color: transparent;
+}
+
+.btn-secondary {
+  background: white;
+  border: 1.5px solid var(--glass-border);
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 1rem 2.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-main);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+
+/* Status Badges */
+.status-badge {
+  @apply px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(44, 62, 80, 0.1);
+}
+
+.status-eligible {
+  background: rgba(34, 197, 94, 0.1);
+  color: #166534;
+}
+
+.status-condonation {
+  background: rgba(234, 179, 8, 0.1);
+  color: #854d0e;
+}
+
+.status-detained {
+  background: rgba(239, 68, 68, 0.1);
+  color: #991b1b;
+}
