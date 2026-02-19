@@ -138,15 +138,27 @@ export const unifiedLogin = async (req, res) => {
     }
 
     // Both failed
-    console.log(`❌ Login failed for identifier: ${identifier}`);
+    console.log(`❌ Unified Login failed for identifier: "${identifier?.trim()}"`);
     return res.status(401).json({
-      message: 'Invalid Username or Security Key'
+      message: 'Invalid Username or Security Key',
+      details: 'Check if you entered the Roll Number correctly.'
     });
 
   } catch (error) {
-    console.error('🔥 Unified login error:', error);
+    console.error('🔥 CRITICAL AUTH ERROR:', error);
+
+    // Check for specific database errors
+    let errorMessage = 'Server error during login.';
+    if (error.name === 'SequelizeConnectionError') {
+      errorMessage = 'Database connection failed. Please check your Supabase link.';
+    } else if (error.name === 'SequelizeDatabaseError') {
+      errorMessage = 'Database table not found. Did you run the seed command?';
+    }
+
     res.status(500).json({
-      message: 'Server error during login. Please check database connection.'
+      message: errorMessage,
+      error_type: error.name,
+      debug_info: error.message.substring(0, 50)
     });
   }
 };
