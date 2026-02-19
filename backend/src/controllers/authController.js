@@ -120,12 +120,20 @@ export const unifiedLogin = async (req, res) => {
     const student = await Student.findOne({ where: { regNo: normalizedRegNo } });
 
     if (student) {
-      // Validate Password (Mobile Number or RegNo fallback)
-      const validPassword = student.mobileNumber ?
-        password.trim() === student.mobileNumber.trim() :
-        password.trim().toUpperCase() === student.regNo.toUpperCase();
+      const passwordTrimmed = password.trim();
+      const regNoStored = student.regNo?.trim().toUpperCase();
+      const mobileStored = student.mobileNumber?.trim();
 
-      if (validPassword) {
+      // NEW: "Double-Match" logic - allow either roll number or mobile number as password
+      const rollMatch = passwordTrimmed.toUpperCase() === regNoStored;
+      const mobileMatch = mobileStored && passwordTrimmed === mobileStored;
+
+      if (rollMatch || mobileMatch) {
+        if (!JWT_SECRET) {
+          console.error('❌ JWT_SECRET is missing!');
+          return res.status(500).json({ message: 'Server Security Error: Contact Admin' });
+        }
+
         // Generate JWT token for student
         const token = jwt.sign(
           { role: 'student', regNo: student.regNo, name: student.name },
@@ -138,18 +146,18 @@ export const unifiedLogin = async (req, res) => {
           user: {
             name: student.name,
             regNo: student.regNo,
-            attendance: [] // Frontend will fetch real attendance later
+            attendance: []
           },
           role: 'student'
         });
       }
+      console.log(`❌ Password mismatch for ${identifier}. Input: "${passwordTrimmed}", Stored Mobile: "${mobileStored}"`);
     }
 
     // Both failed
-    console.log(`❌ Unified Login failed for identifier: "${identifier?.trim()}"`);
     return res.status(401).json({
       message: 'Invalid Username or Security Key',
-      details: 'Check if you entered the Roll Number correctly.'
+      details: 'Ensure your Security Key matches your Mobile Number or Roll Number.'
     });
 
   } catch (error) {
