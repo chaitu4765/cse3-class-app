@@ -62,14 +62,22 @@ export default app;
 
 // Only start the server if we're not running as a Vercel serverless function
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  console.log('🔄 Attempting to sync database...');
   sequelize.sync({ force: false })
     .then(() => {
-      console.log('Database synced successfully');
+      console.log('✅ Database synced successfully');
       app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+        console.log(`🚀 Server is running on port ${PORT}`);
       });
     })
     .catch((err) => {
-      console.error('Failed to sync database:', err);
+      console.error('❌ Database Sync Error:', err.message);
+      if (err.parent) console.error('  Parent Error:', err.parent.message);
+      console.error('  Dialect:', sequelize.getDialect());
+      if (process.env.DATABASE_URL) {
+        console.error('  DATABASE_URL is present');
+      } else {
+        console.error('  DATABASE_URL is missing! Falling back to SQLite.');
+      }
     });
 }

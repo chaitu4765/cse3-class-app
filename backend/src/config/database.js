@@ -5,22 +5,31 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
 
 let sequelize;
 
 if (process.env.DATABASE_URL) {
     // For Supabase/Postgres in production
-    sequelize = new Sequelize(process.env.DATABASE_URL, {
+    // Ensure the URL uses postgresql:// protocol
+    const dbUrl = process.env.DATABASE_URL.replace('postgres://', 'postgresql://');
+
+    sequelize = new Sequelize(dbUrl, {
         dialect: 'postgres',
         protocol: 'postgres',
         dialectOptions: {
-            ssl: isProduction ? {
+            ssl: {
                 require: true,
                 rejectUnauthorized: false
-            } : false
+            }
         },
-        logging: false
+        logging: false,
+        pool: {
+            max: 5,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
+        }
     });
 } else {
     // Fallback to local SQLite for development
