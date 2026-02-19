@@ -1,5 +1,7 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
 import cors from 'cors';
 import sequelize from './config/database.js';
 import authRoutes from './routes/authRoutes.js';
@@ -14,9 +16,6 @@ import './models/AttendanceRecord.js';
 import './models/DailyAttendance.js';
 import './models/DailyAttendanceRecord.js';
 import './models/Announcement.js';
-
-// Load environment variables
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

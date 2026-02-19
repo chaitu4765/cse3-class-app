@@ -138,14 +138,15 @@ export const unifiedLogin = async (req, res) => {
     }
 
     // Both failed
+    console.log(`❌ Login failed for identifier: ${identifier}`);
     return res.status(401).json({
-      message: 'Invalid credentials'
+      message: 'Invalid Username or Security Key'
     });
 
   } catch (error) {
-    console.error('Unified login error:', error);
+    console.error('🔥 Unified login error:', error);
     res.status(500).json({
-      message: 'Server error during login'
+      message: 'Server error during login. Please check database connection.'
     });
   }
 };
