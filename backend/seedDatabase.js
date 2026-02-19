@@ -23,7 +23,7 @@ for (let i = START_REG_NO; i <= END_REG_NO; i++) {
     regNo: regStr,
     dob: new Date("2003-01-01"),
     email: `student${regStr.slice(-3)}@example.com`,
-    mobileNumber: `12345${regStr.slice(-5)}`
+    mobileNumber: regStr
   });
 }
 
