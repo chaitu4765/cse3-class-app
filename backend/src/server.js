@@ -22,35 +22,42 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://cse1class.app",
-    "https://www.cse1class.app",
-    "https://cse3-class-app.vercel.app",
-    /\.vercel\.app$/
-  ],
+  origin: true, // Allow all origins for easier debugging (can be narrowed later)
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-  maxAge: 600 // Cache preflight for 10 minutes
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Request logger
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// Routes
+// Routes - Mount both with and without /api to handle Vercel's varying prefix behavior
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api/attendance', attendanceRoutes);
+app.use('/attendance', attendanceRoutes);
+
 app.use('/api/announcements', announcementRoutes);
+app.use('/announcements', announcementRoutes);
+
 app.use('/api/students', studentRoutes);
+app.use('/students', studentRoutes);
 
 // Health check
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    database: process.env.DATABASE_URL ? 'Postgres' : 'SQLite',
+    env: process.env.NODE_ENV
+  });
+});
+
 app.get('/', (req, res) => {
   res.json({
     message: 'Class Management Backend API is running',
