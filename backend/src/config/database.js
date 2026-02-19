@@ -1,6 +1,10 @@
 import { Sequelize } from 'sequelize';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+// Import dotenv in this file to ensure variables are available during initialization
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +35,10 @@ if (process.env.DATABASE_URL) {
             idle: 10000
         }
     });
+} else if (isProduction) {
+    // If we are in production but DATABASE_URL is missing, we must NOT fall back to sqlite
+    // This provides a clear error in Vercel logs instead of "sqlite3 missing"
+    throw new Error('DATABASE_URL environment variable is missing in production!');
 } else {
     // Fallback to local SQLite for development
     sequelize = new Sequelize({
