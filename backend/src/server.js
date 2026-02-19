@@ -66,6 +66,23 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Debug DB - Check student count
+app.get('/api/debug-db', async (req, res) => {
+  try {
+    const count = await Student.count();
+    res.json({
+      status: 'connected',
+      studentCount: count,
+      database: process.env.DATABASE_URL ? 'Postgres' : 'SQLite'
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
+});
+
 app.get('/', (req, res) => {
   res.json({
     message: 'Class Management Backend API is running',
