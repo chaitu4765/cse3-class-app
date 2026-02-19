@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import GlassCard from '../components/GlassCard';
 import MobileMenu from '../components/MobileMenu';
@@ -149,7 +150,7 @@ const AdminDashboard = () => {
             <h1 className="text-6xl md:text-8xl font-black text-primary tracking-tighter leading-none mt-4">
               Admin <span className="opacity-10">Control.</span>
             </h1>
-            <p className="text-primary/60 font-medium tracking-tight mt-4">Managing class performance and broadcasts</p>
+            <p className="text-primary/90 font-medium tracking-tight mt-4">Managing class performance and broadcasts</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
@@ -157,10 +158,10 @@ const AdminDashboard = () => {
               <div key={index} className="p-8 rounded-[2rem] bg-white/80 backdrop-blur-xl border border-brand-dark/20 hover:border-primary/50 transition-all shadow-sm group">
                 <div className="flex items-center justify-between pointer-events-none">
                   <div>
-                    <p className="text-primary/40 text-[10px] font-black uppercase tracking-widest mb-2">{stat.label}</p>
+                    <p className="text-primary/80 text-[10px] font-black uppercase tracking-widest mb-2">{stat.label}</p>
                     <p className="text-5xl font-black text-primary">{stat.value}</p>
                   </div>
-                  <div className="text-4xl filter sepia opacity-40 group-hover:opacity-100 transition-all">{stat.icon}</div>
+                  <div className="text-4xl filter sepia opacity-80 group-hover:opacity-100 transition-all">{stat.icon}</div>
                 </div>
               </div>
             ))}
@@ -169,24 +170,24 @@ const AdminDashboard = () => {
           <GlassCard className="p-8 md:p-10 mb-10 border-primary/10">
             <h2 className="text-2xl font-bold text-primary mb-8 tracking-tight">Quick Actions</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <a
-                href="/admin/attendance"
+              <Link
+                to="/admin/attendance"
                 className="btn-secondary text-center"
               >
                 Mark Attendance
-              </a>
-              <a
-                href="/admin/attendance/view"
+              </Link>
+              <Link
+                to="/admin/attendance/view"
                 className="btn-secondary text-center"
               >
                 View All Attendance
-              </a>
-              <a
-                href="/admin/announcements"
+              </Link>
+              <Link
+                to="/admin/announcements"
                 className="btn-secondary text-center"
               >
                 Create Broadcast
-              </a>
+              </Link>
               <button
                 onClick={() => setShowResetModal(true)}
                 className="btn-secondary text-center !bg-transparent !border-red-500/40 !text-red-400 hover:!bg-red-500 hover:!text-white hover:!border-transparent transition-all duration-300"
@@ -263,9 +264,9 @@ const AdminDashboard = () => {
             <GlassCard className="p-8 md:p-10 mb-10 border-accent/20">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-primary tracking-tight">Students with Low Attendance</h2>
-                <a href="/admin/attendance/view" className="text-accent hover:text-accent-dark text-sm font-bold tracking-tight px-4 py-2 bg-accent/10 rounded-full transition-colors">
+                <Link to="/admin/attendance/view" className="text-accent hover:text-accent-dark text-sm font-bold tracking-tight px-4 py-2 bg-accent/10 rounded-full transition-colors">
                   View All →
-                </a>
+                </Link>
               </div>
               <div className="space-y-3">
                 {lowAttendanceStudents.map((student, index) => (
@@ -274,8 +275,8 @@ const AdminDashboard = () => {
                       <div>
                         <h3 className="text-xl font-bold text-primary mb-1">{student.name}</h3>
                         <div className="flex flex-col gap-0.5">
-                          <p className="text-sm font-semibold text-text-secondary opacity-70">{student.regNo}</p>
-                          <p className="text-xs font-medium text-white/40 italic">{student.email}</p>
+                          <p className="text-sm font-semibold text-primary/80">{student.regNo}</p>
+                          <p className="text-xs font-medium text-primary/70 italic">{student.email}</p>
                         </div>
                       </div>
                     </div>

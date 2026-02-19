@@ -30,6 +30,8 @@ const AdminLogin = () => {
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('userType', 'admin');
+      localStorage.removeItem('student');
 
       navigate('/admin/dashboard');
     } catch (err: any) {

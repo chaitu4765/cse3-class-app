@@ -14,7 +14,7 @@ const ParticleBackground: React.FC = () => {
         let particles: Particle[] = [];
         const mouse = { x: 0, y: 0 };
 
-        const colors = ['#2C5282', '#537D96', '#EC8F8D', '#1A365D']; // Blue palette
+        const colors = ['#2C5282', '#537D96', '#f30c08ff', '#1A365D']; // Blue palette
 
         class Particle {
             x: number;
@@ -50,7 +50,7 @@ const ParticleBackground: React.FC = () => {
                 let distance = Math.sqrt(dx * dx + dy * dy);
                 let forceDirectionX = dx / distance;
                 let forceDirectionY = dy / distance;
-                let maxDistance = 200; // Increased from 150 for more noticeable reaction
+                let maxDistance = 200;
                 let force = (maxDistance - distance) / maxDistance;
                 let directionX = forceDirectionX * force * this.density;
                 let directionY = forceDirectionY * force * this.density;

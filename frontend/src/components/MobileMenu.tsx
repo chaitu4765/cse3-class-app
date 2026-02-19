@@ -5,15 +5,18 @@ const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const userType = localStorage.getItem('userType');
+  const token = localStorage.getItem('token');
 
-  const menuItems = userType === 'admin' ? [
+  // Fallback if userType is missing (for existing sessions)
+  const effectiveUserType = userType || (token ? 'admin' : 'student');
+
+  const menuItems = effectiveUserType === 'admin' ? [
     { title: 'Dashboard', path: '/admin/dashboard', icon: '🏠' },
-    { title: 'Mark Attendance', path: '/mark-attendance', icon: '📝' },
-    { title: 'Manage Attendance', path: '/attendance-manage', icon: '⚙️' },
-    { title: 'View All records', path: '/view-all-attendance', icon: '📊' },
-    { title: 'Students', path: '/students', icon: '👥' },
-    { title: 'Broadcasts', path: '/announcements', icon: '📢' },
-    { title: 'Timetable', path: '/timetable', icon: '📅' },
+    { title: 'Students', path: '/admin/students', icon: '👥' },
+    { title: 'Mark Attendance', path: '/admin/attendance', icon: '📝' },
+    { title: 'View All Attendance', path: '/admin/attendance/view', icon: '📊' },
+    { title: 'Create Broadcast', path: '/admin/announcements', icon: '📢' },
+    { title: 'Timetable', path: '/admin/timetable', icon: '📅' },
   ] : [
     { title: 'Dashboard', path: '/student/dashboard', icon: '🏠' },
     { title: 'My Attendance', path: '/attendance-lookup', icon: '📊' },

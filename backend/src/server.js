@@ -53,18 +53,23 @@ app.use('/api/students', studentRoutes);
 app.get('/', (req, res) => {
   res.json({
     message: 'Class Management Backend API is running',
-    sqlite: 'Connected'
+    database: process.env.DATABASE_URL ? 'Connected (Postgres)' : 'Connected (SQLite)'
   });
 });
 
-// Sync Database and Start server
-sequelize.sync({ force: false }) // use force: true to reset DB during development
-  .then(() => {
-    console.log('SQLite database synced successfully');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+// For Vercel, we export the app
+export default app;
+
+// Only start the server if we're not running as a Vercel serverless function
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  sequelize.sync({ force: false })
+    .then(() => {
+      console.log('Database synced successfully');
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error('Failed to sync database:', err);
     });
-  })
-  .catch((err) => {
-    console.error('Failed to sync SQLite database:', err);
-  });
+}

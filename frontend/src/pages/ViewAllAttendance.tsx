@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import GlassCard from '../components/GlassCard';
 import MobileMenu from '../components/MobileMenu';
@@ -47,9 +47,18 @@ const ViewAllAttendance = () => {
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // Date range and subject filters
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
+  // Date range and subject filters default to last 30 days
+  const [fromDate, setFromDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 30);
+    return d.toISOString().split('T')[0];
+  });
+  const [toDate, setToDate] = useState(() => new Date().toISOString().split('T')[0]);
   const [selectedSubject, setSelectedSubject] = useState('ALL');
+
+  useEffect(() => {
+    fetchAttendanceSummary();
+  }, []);
 
   const fetchAttendanceSummary = async () => {
     if (!fromDate || !toDate) {
@@ -337,10 +346,18 @@ const ViewAllAttendance = () => {
               </div>
             </GlassCard>
           ) : attendanceData.length === 0 ? (
-            <GlassCard className="p-8 text-center">
-              <div className="text-text-secondary space-y-4">
-                <p className="text-xl">📋 No Records Yet</p>
-                <p>Select a date range and subject, then click "View Summary" to load attendance data.</p>
+            <GlassCard className="p-8 text-center bg-accent/5 border-accent/20">
+              <div className="text-secondary space-y-4">
+                <p className="text-4xl">📋</p>
+                <p className="text-xl font-bold text-primary">No Records Found</p>
+                <p className="text-primary/60 max-w-sm mx-auto">
+                  No attendance was marked for <span className="text-accent font-bold">{selectedSubject === 'ALL' ? 'any subject' : selectedSubject}</span> between
+                  <br />
+                  <span className="font-bold">{new Date(fromDate).toLocaleDateString()}</span> and <span className="font-bold">{new Date(toDate).toLocaleDateString()}</span>.
+                </p>
+                <div className="pt-4">
+                  <p className="text-xs text-primary/40 uppercase tracking-widest font-black">Try selecting a different date range</p>
+                </div>
               </div>
             </GlassCard>
           ) : isAllSubjects ? (

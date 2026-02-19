@@ -49,7 +49,7 @@ body {
   input,
   select,
   textarea {
-    @apply w-full px-4 py-3 rounded-xl bg-white border border-primary/10 text-primary placeholder-primary/30 transition-all focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10;
+    @apply w-full px-4 py-3 rounded-xl bg-white border border-primary/10 text-primary placeholder-primary/50 transition-all focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10;
   }
 
   table {
@@ -57,7 +57,7 @@ body {
   }
 
   th {
-    @apply text-left px-4 py-3 text-primary/60 text-sm font-semibold uppercase tracking-wider;
+    @apply text-left px-4 py-3 text-primary/90 text-sm font-semibold uppercase tracking-wider;
   }
 
   td {

@@ -183,14 +183,14 @@ const StudentDashboard = () => {
             Welcome, <span className="opacity-60">{student.name?.split(' ')[0] || 'Student'}!</span>
           </h1>
 
-          <p className="text-primary/40 font-black mb-10 tracking-widest uppercase text-[10px] opacity-70">Acknowledge your progress today</p>
+          <p className="text-primary/80 font-black mb-10 tracking-widest uppercase text-[10px]">Acknowledge your progress today</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
             {stats.map((stat, index) => (
               <GlassCard key={index} className="p-6 group hover:scale-105 transition-transform border-primary/10">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-text-secondary text-sm font-bold mb-1 uppercase tracking-tight">{stat.label}</p>
+                    <p className="text-primary/80 text-sm font-bold mb-1 uppercase tracking-tight">{stat.label}</p>
                     <p className={`text-4xl font-extrabold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>{stat.value}</p>
                   </div>
                   <div className="text-4xl group-hover:scale-110 transition-transform opacity-80 group-hover:opacity-100">{stat.icon}</div>
@@ -220,7 +220,7 @@ const StudentDashboard = () => {
                           <div key={cIdx} className="bg-secondary/10 p-2.5 rounded-xl border border-primary/5 hover:border-accent/30 transition-colors group/item">
                             <p className="text-[10px] font-bold text-accent mb-0.5">{cls.time}</p>
                             <p className="text-xs font-black text-primary group-hover/item:text-accent transition-colors">{cls.sub}</p>
-                            <p className="text-[9px] font-medium text-primary/30">{cls.room}</p>
+                            <p className="text-[9px] font-bold text-primary/60">{cls.room}</p>
                           </div>
                         ))}
                       </div>

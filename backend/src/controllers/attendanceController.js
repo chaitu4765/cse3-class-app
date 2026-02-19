@@ -125,13 +125,13 @@ export const markAttendance = async (req, res) => {
           attendanceRecord = await Attendance.create({
             studentId,
             subject,
-            attended: status === 'Present' ? 1 : 0,
+            attended: String(status).toLowerCase() === 'present' ? 1 : 0,
             total: 1
           });
         } else {
           // Update existing record
           attendanceRecord.total += 1;
-          if (status === 'Present') {
+          if (String(status).toLowerCase() === 'present') {
             attendanceRecord.attended += 1;
           }
           await attendanceRecord.save();
@@ -260,8 +260,9 @@ export const updateAttendance = async (req, res) => {
         }
 
         // Check if status changed
-        const oldStatus = oldRecordsMap.get(studentId);
-        const statusChanged = oldStatus !== status;
+        const oldStatusStr = String(oldStatus || '').toLowerCase();
+        const newStatusStr = String(status || '').toLowerCase();
+        const statusChanged = oldStatusStr !== newStatusStr;
 
         if (statusChanged) {
           changedRecords.push({
@@ -298,19 +299,19 @@ export const updateAttendance = async (req, res) => {
             attendanceRecord = await Attendance.create({
               studentId,
               subject,
-              attended: status === 'Present' ? 1 : 0,
+              attended: newStatusStr === 'present' ? 1 : 0,
               total: 1
             });
           } else {
             // Update the record based on status change
-            if (oldStatus === 'Present' && status === 'Absent') {
+            if (oldStatusStr === 'present' && newStatusStr === 'absent') {
               attendanceRecord.attended = Math.max(0, attendanceRecord.attended - 1);
-            } else if (oldStatus === 'Absent' && status === 'Present') {
+            } else if (oldStatusStr === 'absent' && newStatusStr === 'present') {
               attendanceRecord.attended += 1;
             } else if (oldStatus === undefined) {
               // If it was missing from daily records but exists in summary, increment total
               attendanceRecord.total += 1;
-              if (status === 'Present') attendanceRecord.attended += 1;
+              if (newStatusStr === 'present') attendanceRecord.attended += 1;
             }
             await attendanceRecord.save();
           }
@@ -604,31 +605,34 @@ export const getAllAttendance = async (req, res) => {
     });
 
     // Combine students with their attendance
-    const data = students.map(student => {
+    const studentsWithAttendance = students.map(student => {
       const studentId = student.id;
       const attendance = attendanceMap[studentId] || [];
 
-      const attendanceBySubject = {};
-      ALLOWED_SUBJECTS.forEach(subject => {
+      const attendanceArray = ALLOWED_SUBJECTS.map(subject => {
         const subjectAttendance = attendance.find(a => a.subject === subject);
-        attendanceBySubject[subject] = subjectAttendance || {
-          attended: 0,
-          total: 0,
-          percentage: 0,
-          status: 'N/A'
+        return {
+          subject,
+          attended: subjectAttendance ? subjectAttendance.attended : 0,
+          total: subjectAttendance ? subjectAttendance.total : 0,
+          percentage: subjectAttendance ? subjectAttendance.percentage : 0,
+          status: subjectAttendance ? subjectAttendance.status : 'N/A'
         };
       });
 
       return {
+        _id: student.id,
+        id: student.id,
         regNo: student.regNo,
         name: student.name,
-        ...attendanceBySubject
+        email: student.email,
+        attendance: attendanceArray
       };
     });
 
     res.status(200).json({
-      count: data.length,
-      data: data
+      count: studentsWithAttendance.length,
+      students: studentsWithAttendance
     });
 
   } catch (error) {
@@ -741,6 +745,17 @@ export const getAttendanceSummary = async (req, res) => {
       include: [{ model: DailyAttendanceRecord, as: 'records' }]
     });
 
+    if (dailyAttendances.length === 0) {
+      return res.status(200).json({
+        fromDate,
+        toDate,
+        subject,
+        count: 0,
+        data: [],
+        message: `No attendance records found for ${subject} between ${fromDate} and ${toDate}`
+      });
+    }
+
     const data = [];
 
     if (subject === 'ALL') {
@@ -761,8 +776,8 @@ export const getAttendanceSummary = async (req, res) => {
           let attended = 0;
 
           subjectDays.forEach(da => {
-            const record = da.records.find(r => r.studentId === student.id);
-            if (record && record.status === 'Present') attended++;
+            const record = (da.records || []).find(r => String(r.studentId) === String(student.id));
+            if (record && String(record.status).toLowerCase() === 'present') attended++;
           });
 
           const summary = await Attendance.findOne({ where: { studentId: student.id, subject: subj } });
@@ -793,8 +808,8 @@ export const getAttendanceSummary = async (req, res) => {
         let attended = 0;
 
         subjectDays.forEach(da => {
-          const record = da.records.find(r => r.studentId === student.id);
-          if (record && record.status === 'Present') attended++;
+          const record = (da.records || []).find(r => String(r.studentId) === String(student.id));
+          if (record && String(record.status).toLowerCase() === 'present') attended++;
         });
 
         const summary = await Attendance.findOne({ where: { studentId: student.id, subject } });

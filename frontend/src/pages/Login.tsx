@@ -31,6 +31,7 @@ const Login = () => {
             if (role === 'CR') {
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('userType', 'admin');
                 navigate('/admin/dashboard');
             } else if (role === 'student') {
                 localStorage.setItem('student', JSON.stringify(user));

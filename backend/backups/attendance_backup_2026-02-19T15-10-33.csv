@@ -1,0 +1,401 @@
+RegNo,Name,Subject,Date,Status,Total,Attended,Percentage,EligibilityStatus
+324506402161,"Devara Naga Meenakshi",ME,Multiple,Varied,2,2,100.00,Eligible
+324506402161,"Devara Naga Meenakshi",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402161,"Devara Naga Meenakshi",DBMS,Multiple,Varied,1,1,100.00,Eligible
+324506402161,"Devara Naga Meenakshi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402161,"Devara Naga Meenakshi",FLAT,None,N/A,0,0,0.00,N/A
+324506402162,"DEVARASETTY SAI CHARAN",ME,Multiple,Varied,2,2,100.00,Eligible
+324506402162,"DEVARASETTY SAI CHARAN",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402162,"DEVARASETTY SAI CHARAN",DBMS,Multiple,Varied,1,1,100.00,Eligible
+324506402162,"DEVARASETTY SAI CHARAN",DAA,Multiple,Varied,1,0,0.00,Ineligible
+324506402162,"DEVARASETTY SAI CHARAN",FLAT,None,N/A,0,0,0.00,N/A
+324506402163,"Dhara Thanda Kali Vaishnavi",ME,Multiple,Varied,2,2,100.00,Eligible
+324506402163,"Dhara Thanda Kali Vaishnavi",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402163,"Dhara Thanda Kali Vaishnavi",DBMS,Multiple,Varied,1,1,100.00,Eligible
+324506402163,"Dhara Thanda Kali Vaishnavi",DAA,Multiple,Varied,1,0,0.00,Ineligible
+324506402163,"Dhara Thanda Kali Vaishnavi",FLAT,None,N/A,0,0,0.00,N/A
+324506402164,"Student 164",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402164,"Student 164",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402164,"Student 164",DBMS,Multiple,Varied,1,1,100.00,Eligible
+324506402164,"Student 164",DAA,Multiple,Varied,1,0,0.00,Ineligible
+324506402164,"Student 164",FLAT,None,N/A,0,0,0.00,N/A
+324506402165,"Dharimireddy Gnana Kousik",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402165,"Dharimireddy Gnana Kousik",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402165,"Dharimireddy Gnana Kousik",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402165,"Dharimireddy Gnana Kousik",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402165,"Dharimireddy Gnana Kousik",FLAT,None,N/A,0,0,0.00,N/A
+324506402166,"Mohana Sri Vyshnavi",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402166,"Mohana Sri Vyshnavi",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402166,"Mohana Sri Vyshnavi",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402166,"Mohana Sri Vyshnavi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402166,"Mohana Sri Vyshnavi",FLAT,None,N/A,0,0,0.00,N/A
+324506402167,"DHARMAVARAPU HARI TEJA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402167,"DHARMAVARAPU HARI TEJA",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402167,"DHARMAVARAPU HARI TEJA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402167,"DHARMAVARAPU HARI TEJA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402167,"DHARMAVARAPU HARI TEJA",FLAT,None,N/A,0,0,0.00,N/A
+324506402168,"Student 168",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402168,"Student 168",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402168,"Student 168",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402168,"Student 168",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402168,"Student 168",FLAT,None,N/A,0,0,0.00,N/A
+324506402169,"DIGUMARTHI MOUNICA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402169,"DIGUMARTHI MOUNICA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402169,"DIGUMARTHI MOUNICA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402169,"DIGUMARTHI MOUNICA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402169,"DIGUMARTHI MOUNICA",FLAT,None,N/A,0,0,0.00,N/A
+324506402170,"Sruthi Satya",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402170,"Sruthi Satya",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402170,"Sruthi Satya",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402170,"Sruthi Satya",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402170,"Sruthi Satya",FLAT,None,N/A,0,0,0.00,N/A
+324506402171,"DOKALA AVINASH",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402171,"DOKALA AVINASH",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402171,"DOKALA AVINASH",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402171,"DOKALA AVINASH",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402171,"DOKALA AVINASH",FLAT,None,N/A,0,0,0.00,N/A
+324506402172,"Dokara Pranav",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402172,"Dokara Pranav",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402172,"Dokara Pranav",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402172,"Dokara Pranav",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402172,"Dokara Pranav",FLAT,None,N/A,0,0,0.00,N/A
+324506402173,"Dommeti Swamy",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402173,"Dommeti Swamy",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402173,"Dommeti Swamy",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402173,"Dommeti Swamy",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402173,"Dommeti Swamy",FLAT,None,N/A,0,0,0.00,N/A
+324506402174,"Dommeti Jai Sree satya vyshnavi Vyshnavi",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402174,"Dommeti Jai Sree satya vyshnavi Vyshnavi",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402174,"Dommeti Jai Sree satya vyshnavi Vyshnavi",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402174,"Dommeti Jai Sree satya vyshnavi Vyshnavi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402174,"Dommeti Jai Sree satya vyshnavi Vyshnavi",FLAT,None,N/A,0,0,0.00,N/A
+324506402175,"Dommeti Pardhavi",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402175,"Dommeti Pardhavi",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402175,"Dommeti Pardhavi",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402175,"Dommeti Pardhavi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402175,"Dommeti Pardhavi",FLAT,None,N/A,0,0,0.00,N/A
+324506402176,"Dudakula Farooq basha Farooq",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402176,"Dudakula Farooq basha Farooq",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402176,"Dudakula Farooq basha Farooq",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402176,"Dudakula Farooq basha Farooq",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402176,"Dudakula Farooq basha Farooq",FLAT,None,N/A,0,0,0.00,N/A
+324506402177,"D.Rishindra Reddy",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402177,"D.Rishindra Reddy",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402177,"D.Rishindra Reddy",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402177,"D.Rishindra Reddy",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402177,"D.Rishindra Reddy",FLAT,None,N/A,0,0,0.00,N/A
+324506402178,"SAIRAJ DUMPALA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402178,"SAIRAJ DUMPALA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402178,"SAIRAJ DUMPALA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402178,"SAIRAJ DUMPALA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402178,"SAIRAJ DUMPALA",FLAT,None,N/A,0,0,0.00,N/A
+324506402179,"Dunna Kusuma Praneethika",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402179,"Dunna Kusuma Praneethika",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402179,"Dunna Kusuma Praneethika",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402179,"Dunna Kusuma Praneethika",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402179,"Dunna Kusuma Praneethika",FLAT,None,N/A,0,0,0.00,N/A
+324506402180,"Sai Kameswara Ajay Durvasula",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402180,"Sai Kameswara Ajay Durvasula",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402180,"Sai Kameswara Ajay Durvasula",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402180,"Sai Kameswara Ajay Durvasula",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402180,"Sai Kameswara Ajay Durvasula",FLAT,None,N/A,0,0,0.00,N/A
+324506402181,"EAGALA KIRAN",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402181,"EAGALA KIRAN",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402181,"EAGALA KIRAN",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402181,"EAGALA KIRAN",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402181,"EAGALA KIRAN",FLAT,None,N/A,0,0,0.00,N/A
+324506402182,"Akhila Edakula",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402182,"Akhila Edakula",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402182,"Akhila Edakula",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402182,"Akhila Edakula",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402182,"Akhila Edakula",FLAT,None,N/A,0,0,0.00,N/A
+324506402183,"Alekhya Edarapalli",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402183,"Alekhya Edarapalli",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402183,"Alekhya Edarapalli",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402183,"Alekhya Edarapalli",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402183,"Alekhya Edarapalli",FLAT,None,N/A,0,0,0.00,N/A
+324506402184,"Navya Sri Ejjurothu",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402184,"Navya Sri Ejjurothu",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402184,"Navya Sri Ejjurothu",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402184,"Navya Sri Ejjurothu",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402184,"Navya Sri Ejjurothu",FLAT,None,N/A,0,0,0.00,N/A
+324506402185,"Student 185",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402185,"Student 185",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402185,"Student 185",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402185,"Student 185",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402185,"Student 185",FLAT,None,N/A,0,0,0.00,N/A
+324506402186,"Nithish naveen Enjeti",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402186,"Nithish naveen Enjeti",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402186,"Nithish naveen Enjeti",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402186,"Nithish naveen Enjeti",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402186,"Nithish naveen Enjeti",FLAT,None,N/A,0,0,0.00,N/A
+324506402187,"Erusumalla Rushitha Krishna",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402187,"Erusumalla Rushitha Krishna",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402187,"Erusumalla Rushitha Krishna",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402187,"Erusumalla Rushitha Krishna",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402187,"Erusumalla Rushitha Krishna",FLAT,None,N/A,0,0,0.00,N/A
+324506402188,"RISHITHA ETTERI",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402188,"RISHITHA ETTERI",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402188,"RISHITHA ETTERI",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402188,"RISHITHA ETTERI",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402188,"RISHITHA ETTERI",FLAT,None,N/A,0,0,0.00,N/A
+324506402189,"Gadde tanusri Tanusri",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402189,"Gadde tanusri Tanusri",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402189,"Gadde tanusri Tanusri",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402189,"Gadde tanusri Tanusri",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402189,"Gadde tanusri Tanusri",FLAT,None,N/A,0,0,0.00,N/A
+324506402190,"Siddhardha Reddy",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402190,"Siddhardha Reddy",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402190,"Siddhardha Reddy",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402190,"Siddhardha Reddy",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402190,"Siddhardha Reddy",FLAT,None,N/A,0,0,0.00,N/A
+324506402191,"Harsha vardhan Gajula",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402191,"Harsha vardhan Gajula",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402191,"Harsha vardhan Gajula",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402191,"Harsha vardhan Gajula",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402191,"Harsha vardhan Gajula",FLAT,None,N/A,0,0,0.00,N/A
+324506402192,"Yashwanth Naidu Galla",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402192,"Yashwanth Naidu Galla",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402192,"Yashwanth Naidu Galla",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402192,"Yashwanth Naidu Galla",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402192,"Yashwanth Naidu Galla",FLAT,None,N/A,0,0,0.00,N/A
+324506402193,"Gandaboyina Surya",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402193,"Gandaboyina Surya",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402193,"Gandaboyina Surya",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402193,"Gandaboyina Surya",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402193,"Gandaboyina Surya",FLAT,None,N/A,0,0,0.00,N/A
+324506402194,"PAVAN KUMAR GANDEM",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402194,"PAVAN KUMAR GANDEM",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402194,"PAVAN KUMAR GANDEM",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402194,"PAVAN KUMAR GANDEM",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402194,"PAVAN KUMAR GANDEM",FLAT,None,N/A,0,0,0.00,N/A
+324506402195,"GANDEPALLI HEMANTHA SAGAR",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402195,"GANDEPALLI HEMANTHA SAGAR",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402195,"GANDEPALLI HEMANTHA SAGAR",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402195,"GANDEPALLI HEMANTHA SAGAR",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402195,"GANDEPALLI HEMANTHA SAGAR",FLAT,None,N/A,0,0,0.00,N/A
+324506402196,"GANDHARV SAGIRAJU",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402196,"GANDHARV SAGIRAJU",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402196,"GANDHARV SAGIRAJU",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402196,"GANDHARV SAGIRAJU",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402196,"GANDHARV SAGIRAJU",FLAT,None,N/A,0,0,0.00,N/A
+324506402197,"Koushik naidu Gandi",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402197,"Koushik naidu Gandi",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402197,"Koushik naidu Gandi",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402197,"Koushik naidu Gandi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402197,"Koushik naidu Gandi",FLAT,None,N/A,0,0,0.00,N/A
+324506402198,"GUNA VALLABH GANTA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402198,"GUNA VALLABH GANTA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402198,"GUNA VALLABH GANTA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402198,"GUNA VALLABH GANTA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402198,"GUNA VALLABH GANTA",FLAT,None,N/A,0,0,0.00,N/A
+324506402199,"KRISHNA CHAITANYA GANTA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402199,"KRISHNA CHAITANYA GANTA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402199,"KRISHNA CHAITANYA GANTA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402199,"KRISHNA CHAITANYA GANTA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402199,"KRISHNA CHAITANYA GANTA",FLAT,None,N/A,0,0,0.00,N/A
+324506402200,"Pardhivi sarayu Ganti",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402200,"Pardhivi sarayu Ganti",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402200,"Pardhivi sarayu Ganti",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402200,"Pardhivi sarayu Ganti",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402200,"Pardhivi sarayu Ganti",FLAT,None,N/A,0,0,0.00,N/A
+324506402201,"VAISHNAVI GANTI",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402201,"VAISHNAVI GANTI",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402201,"VAISHNAVI GANTI",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402201,"VAISHNAVI GANTI",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402201,"VAISHNAVI GANTI",FLAT,None,N/A,0,0,0.00,N/A
+324506402202,"Ujjiv Gantyada",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402202,"Ujjiv Gantyada",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402202,"Ujjiv Gantyada",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402202,"Ujjiv Gantyada",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402202,"Ujjiv Gantyada",FLAT,None,N/A,0,0,0.00,N/A
+324506402203,"G sai Prabhas",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402203,"G sai Prabhas",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402203,"G sai Prabhas",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402203,"G sai Prabhas",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402203,"G sai Prabhas",FLAT,None,N/A,0,0,0.00,N/A
+324506402204,"GIRADA KRANTHI CHANDRA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402204,"GIRADA KRANTHI CHANDRA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402204,"GIRADA KRANTHI CHANDRA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402204,"GIRADA KRANTHI CHANDRA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402204,"GIRADA KRANTHI CHANDRA",FLAT,None,N/A,0,0,0.00,N/A
+324506402205,"NIKHITH GODABA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402205,"NIKHITH GODABA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402205,"NIKHITH GODABA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402205,"NIKHITH GODABA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402205,"NIKHITH GODABA",FLAT,None,N/A,0,0,0.00,N/A
+324506402206,"Nikhil Gokada",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402206,"Nikhil Gokada",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402206,"Nikhil Gokada",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402206,"Nikhil Gokada",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402206,"Nikhil Gokada",FLAT,None,N/A,0,0,0.00,N/A
+324506402207,"Golagani Navaneeth",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402207,"Golagani Navaneeth",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402207,"Golagani Navaneeth",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402207,"Golagani Navaneeth",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402207,"Golagani Navaneeth",FLAT,None,N/A,0,0,0.00,N/A
+324506402208,"Jeeva Kumari",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402208,"Jeeva Kumari",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402208,"Jeeva Kumari",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402208,"Jeeva Kumari",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402208,"Jeeva Kumari",FLAT,None,N/A,0,0,0.00,N/A
+324506402209,"Tejaswani Gollapalli",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402209,"Tejaswani Gollapalli",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402209,"Tejaswani Gollapalli",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402209,"Tejaswani Gollapalli",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402209,"Tejaswani Gollapalli",FLAT,None,N/A,0,0,0.00,N/A
+324506402210,"Golluri Bhagyaraj",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402210,"Golluri Bhagyaraj",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402210,"Golluri Bhagyaraj",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402210,"Golluri Bhagyaraj",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402210,"Golluri Bhagyaraj",FLAT,None,N/A,0,0,0.00,N/A
+324506402211,"GONTHINI SAI PRATHIMA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402211,"GONTHINI SAI PRATHIMA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402211,"GONTHINI SAI PRATHIMA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402211,"GONTHINI SAI PRATHIMA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402211,"GONTHINI SAI PRATHIMA",FLAT,None,N/A,0,0,0.00,N/A
+324506402212,"Vandana Gopisetty",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402212,"Vandana Gopisetty",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402212,"Vandana Gopisetty",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402212,"Vandana Gopisetty",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402212,"Vandana Gopisetty",FLAT,None,N/A,0,0,0.00,N/A
+324506402213,"Surya teja Gorla",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402213,"Surya teja Gorla",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402213,"Surya teja Gorla",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402213,"Surya teja Gorla",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402213,"Surya teja Gorla",FLAT,None,N/A,0,0,0.00,N/A
+324506402214,"Gorle Abhishek",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402214,"Gorle Abhishek",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402214,"Gorle Abhishek",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402214,"Gorle Abhishek",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402214,"Gorle Abhishek",FLAT,None,N/A,0,0,0.00,N/A
+324506402215,"SHAJITHA GRANDHE",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402215,"SHAJITHA GRANDHE",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402215,"SHAJITHA GRANDHE",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402215,"SHAJITHA GRANDHE",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402215,"SHAJITHA GRANDHE",FLAT,None,N/A,0,0,0.00,N/A
+324506402216,"GRANDHI ASRITHA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402216,"GRANDHI ASRITHA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402216,"GRANDHI ASRITHA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402216,"GRANDHI ASRITHA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402216,"GRANDHI ASRITHA",FLAT,None,N/A,0,0,0.00,N/A
+324506402217,"Bindu sri Gubbala",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402217,"Bindu sri Gubbala",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402217,"Bindu sri Gubbala",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402217,"Bindu sri Gubbala",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402217,"Bindu sri Gubbala",FLAT,None,N/A,0,0,0.00,N/A
+324506402218,"Gudapudi Siddharth Bhargav",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402218,"Gudapudi Siddharth Bhargav",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402218,"Gudapudi Siddharth Bhargav",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402218,"Gudapudi Siddharth Bhargav",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402218,"Gudapudi Siddharth Bhargav",FLAT,None,N/A,0,0,0.00,N/A
+324506402219,"Student 219",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402219,"Student 219",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402219,"Student 219",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402219,"Student 219",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402219,"Student 219",FLAT,None,N/A,0,0,0.00,N/A
+324506402220,"NAGA VIGNESH",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402220,"NAGA VIGNESH",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402220,"NAGA VIGNESH",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402220,"NAGA VIGNESH",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402220,"NAGA VIGNESH",FLAT,None,N/A,0,0,0.00,N/A
+324506402221,"CHARAN GUDIYA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402221,"CHARAN GUDIYA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402221,"CHARAN GUDIYA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402221,"CHARAN GUDIYA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402221,"CHARAN GUDIYA",FLAT,None,N/A,0,0,0.00,N/A
+324506402222,"UDAYADITHYA GULIVINDALA",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402222,"UDAYADITHYA GULIVINDALA",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402222,"UDAYADITHYA GULIVINDALA",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402222,"UDAYADITHYA GULIVINDALA",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402222,"UDAYADITHYA GULIVINDALA",FLAT,None,N/A,0,0,0.00,N/A
+324506402223,"Gullala Vedaanga Varma",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402223,"Gullala Vedaanga Varma",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402223,"Gullala Vedaanga Varma",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402223,"Gullala Vedaanga Varma",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402223,"Gullala Vedaanga Varma",FLAT,None,N/A,0,0,0.00,N/A
+324506402224,"KARTHIKEYA MANIKANTA GUMMIDI",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402224,"KARTHIKEYA MANIKANTA GUMMIDI",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402224,"KARTHIKEYA MANIKANTA GUMMIDI",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402224,"KARTHIKEYA MANIKANTA GUMMIDI",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402224,"KARTHIKEYA MANIKANTA GUMMIDI",FLAT,None,N/A,0,0,0.00,N/A
+324506402225,"GUMMULURI KARTHIK",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402225,"GUMMULURI KARTHIK",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402225,"GUMMULURI KARTHIK",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402225,"GUMMULURI KARTHIK",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402225,"GUMMULURI KARTHIK",FLAT,None,N/A,0,0,0.00,N/A
+324506402226,"Student 226",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402226,"Student 226",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402226,"Student 226",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402226,"Student 226",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402226,"Student 226",FLAT,None,N/A,0,0,0.00,N/A
+324506402227,"Gundu Sai Lakshmi",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402227,"Gundu Sai Lakshmi",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402227,"Gundu Sai Lakshmi",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402227,"Gundu Sai Lakshmi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402227,"Gundu Sai Lakshmi",FLAT,None,N/A,0,0,0.00,N/A
+324506402228,"Pranay Guntreddi",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402228,"Pranay Guntreddi",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402228,"Pranay Guntreddi",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402228,"Pranay Guntreddi",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402228,"Pranay Guntreddi",FLAT,None,N/A,0,0,0.00,N/A
+324506402229,"srishant Gunti",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402229,"srishant Gunti",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402229,"srishant Gunti",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402229,"srishant Gunti",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402229,"srishant Gunti",FLAT,None,N/A,0,0,0.00,N/A
+324506402230,"G.V.Ratna Kumari .",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402230,"G.V.Ratna Kumari .",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402230,"G.V.Ratna Kumari .",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402230,"G.V.Ratna Kumari .",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402230,"G.V.Ratna Kumari .",FLAT,None,N/A,0,0,0.00,N/A
+324506402231,"Guttula Nagendra",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402231,"Guttula Nagendra",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402231,"Guttula Nagendra",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402231,"Guttula Nagendra",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402231,"Guttula Nagendra",FLAT,None,N/A,0,0,0.00,N/A
+324506402232,"Priyanka Guttula",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402232,"Priyanka Guttula",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402232,"Priyanka Guttula",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402232,"Priyanka Guttula",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402232,"Priyanka Guttula",FLAT,None,N/A,0,0,0.00,N/A
+324506402233,"Student 233",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402233,"Student 233",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402233,"Student 233",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402233,"Student 233",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402233,"Student 233",FLAT,None,N/A,0,0,0.00,N/A
+324506402234,"Hari Satya Venkata Naga Dattha Sriharsha",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402234,"Hari Satya Venkata Naga Dattha Sriharsha",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402234,"Hari Satya Venkata Naga Dattha Sriharsha",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402234,"Hari Satya Venkata Naga Dattha Sriharsha",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402234,"Hari Satya Venkata Naga Dattha Sriharsha",FLAT,None,N/A,0,0,0.00,N/A
+324506402235,"Hasini Vechalapu",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402235,"Hasini Vechalapu",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402235,"Hasini Vechalapu",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402235,"Hasini Vechalapu",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402235,"Hasini Vechalapu",FLAT,None,N/A,0,0,0.00,N/A
+324506402236,"Ijjada Venugopal",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402236,"Ijjada Venugopal",MP,Multiple,Varied,3,1,33.33,Ineligible
+324506402236,"Ijjada Venugopal",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402236,"Ijjada Venugopal",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402236,"Ijjada Venugopal",FLAT,None,N/A,0,0,0.00,N/A
+324506402237,"Indala Meghana",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402237,"Indala Meghana",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402237,"Indala Meghana",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402237,"Indala Meghana",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402237,"Indala Meghana",FLAT,None,N/A,0,0,0.00,N/A
+324506402238,"Yuvasai Indugabilli",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402238,"Yuvasai Indugabilli",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402238,"Yuvasai Indugabilli",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402238,"Yuvasai Indugabilli",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402238,"Yuvasai Indugabilli",FLAT,None,N/A,0,0,0.00,N/A
+324506402239,"Ismat Fathima",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402239,"Ismat Fathima",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402239,"Ismat Fathima",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402239,"Ismat Fathima",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402239,"Ismat Fathima",FLAT,None,N/A,0,0,0.00,N/A
+324506402240,"Student 240",ME,Multiple,Varied,2,1,50.00,Ineligible
+324506402240,"Student 240",MP,Multiple,Varied,3,2,66.67,Ineligible
+324506402240,"Student 240",DBMS,Multiple,Varied,1,0,0.00,Ineligible
+324506402240,"Student 240",DAA,Multiple,Varied,1,1,100.00,Eligible
+324506402240,"Student 240",FLAT,None,N/A,0,0,0.00,N/A

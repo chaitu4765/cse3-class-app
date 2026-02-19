@@ -67,7 +67,7 @@ const TimeTable = () => {
                             Timetable<span className="opacity-10">.</span>
                         </h1>
                     </div>
-                    <p className="text-primary/40 font-black uppercase tracking-widest text-[10px] mb-10 text-center md:text-left">Weekly schedule for CSE 3</p>
+                    <p className="text-primary/80 font-black uppercase tracking-widest text-[10px] mb-10 text-center md:text-left">Weekly schedule for CSE 3</p>
 
                     <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-10">
                         {days.map((day) => (
@@ -92,24 +92,24 @@ const TimeTable = () => {
                                     className="group hover:bg-primary/5 transition-all p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
                                 >
                                     <div className="flex items-center gap-6">
-                                        <div className="w-20 md:w-24 text-[10px] font-black text-primary/40 uppercase tracking-widest bg-primary/5 px-3 py-2 rounded-xl text-center group-hover:bg-primary/10 transition-colors">
+                                        <div className="w-20 md:w-24 text-[10px] font-black text-primary/80 uppercase tracking-widest bg-primary/5 px-3 py-2 rounded-xl text-center group-hover:bg-primary/10 transition-colors">
                                             {timeSlot}
                                         </div>
                                         <div>
                                             <h3 className="text-xl md:text-2xl font-black text-secondary tracking-tight">
                                                 {subject || (
-                                                    <span className="text-secondary/20 italic font-medium">Free Period</span>
+                                                    <span className="text-secondary/50 italic font-medium">Free Period</span>
                                                 )}
                                             </h3>
                                             {subject && (
-                                                <p className="text-[10px] font-black text-primary/60 uppercase tracking-[0.2em] mt-1">Core Subject</p>
+                                                <p className="text-[10px] font-black text-primary/90 uppercase tracking-[0.2em] mt-1">Core Subject</p>
                                             )}
                                         </div>
                                     </div>
                                     {subject ? (
                                         <div className="flex items-center gap-2 self-end md:self-auto">
                                             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                                            <span className="text-[10px] font-black text-secondary/40 uppercase tracking-widest">Active Session</span>
+                                            <span className="text-[10px] font-black text-secondary/80 uppercase tracking-widest">Active Session</span>
                                         </div>
                                     ) : (
                                         <div className="px-4 py-2 bg-secondary/5 rounded-xl text-[10px] font-black text-secondary/20 uppercase tracking-widest self-end md:self-auto">
