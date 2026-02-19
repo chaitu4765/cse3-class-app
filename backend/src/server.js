@@ -10,7 +10,7 @@ import announcementRoutes from './routes/announcementRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 
 // Import models to ensure they are registered for sync
-import './models/Student.js';
+import Student from './models/Student.js';
 import './models/Attendance.js';
 import './models/AttendanceRecord.js';
 import './models/DailyAttendance.js';
