@@ -20,6 +20,14 @@ import './models/Announcement.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Diagnostics
+console.log('--- Production Diagnostics ---');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('DATABASE_URL Present:', !!process.env.DATABASE_URL);
+console.log('JWT_SECRET Present:', !!process.env.JWT_SECRET);
+console.log('CR_EMAIL Present:', !!process.env.CR_EMAIL);
+console.log('------------------------------');
+
 // Middleware
 app.use(cors({
   origin: true, // Allow all origins for easier debugging (can be narrowed later)

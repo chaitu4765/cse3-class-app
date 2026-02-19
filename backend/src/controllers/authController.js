@@ -126,7 +126,15 @@ export const unifiedLogin = async (req, res) => {
         password.trim().toUpperCase() === student.regNo.toUpperCase();
 
       if (validPassword) {
+        // Generate JWT token for student
+        const token = jwt.sign(
+          { role: 'student', regNo: student.regNo, name: student.name },
+          JWT_SECRET,
+          { expiresIn: '24h' }
+        );
+
         return res.status(200).json({
+          token,
           user: {
             name: student.name,
             regNo: student.regNo,
