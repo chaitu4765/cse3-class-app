@@ -1,11 +1,13 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-console.log('🔧 API Base URL:', baseURL);
-console.log('🔧 VITE_API_BASE_URL env:', import.meta.env.VITE_API_BASE_URL);
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const withProtocol = rawBaseUrl.startsWith('http') ? rawBaseUrl : `https://${rawBaseUrl}`;
+const normalizedBaseUrl = withProtocol.endsWith('/api')
+  ? withProtocol
+  : `${withProtocol.replace(/\/+$/, '')}/api`;
 
 const api = axios.create({
-  baseURL,
+  baseURL: normalizedBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },
