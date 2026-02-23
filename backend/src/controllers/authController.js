@@ -114,21 +114,15 @@ export const unifiedLogin = async (req, res) => {
       }
     }
 
-    // 2. Try Student Login
-    // Lookup by RegNo
+    // 2. Try Student Login (RegNo + Mobile Number)
     const normalizedRegNo = identifier.trim().toUpperCase();
     const student = await Student.findOne({ where: { regNo: normalizedRegNo } });
 
     if (student) {
       const passwordTrimmed = password.trim();
-      const regNoStored = student.regNo?.trim().toUpperCase();
       const mobileStored = student.mobileNumber?.trim();
 
-      // NEW: "Double-Match" logic - allow either roll number or mobile number as password
-      const rollMatch = passwordTrimmed.toUpperCase() === regNoStored;
-      const mobileMatch = mobileStored && passwordTrimmed === mobileStored;
-
-      if (rollMatch || mobileMatch) {
+      if (mobileStored && passwordTrimmed === mobileStored) {
         if (!JWT_SECRET) {
           console.error('❌ JWT_SECRET is missing!');
           return res.status(500).json({ message: 'Server Security Error: Contact Admin' });
@@ -151,13 +145,21 @@ export const unifiedLogin = async (req, res) => {
           role: 'student'
         });
       }
-      console.log(`❌ Password mismatch for ${identifier}. Input: "${passwordTrimmed}", Stored Mobile: "${mobileStored}"`);
+
+      if (!mobileStored) {
+        return res.status(401).json({
+          message: 'Mobile number not set for this student',
+          details: 'Ask the admin to update your mobile number before login.'
+        });
+      }
+
+      console.log(`❌ Mobile mismatch for ${identifier}. Input: "${passwordTrimmed}", Stored Mobile: "${mobileStored}"`);
     }
 
     // Both failed
     return res.status(401).json({
-      message: 'Invalid Username or Security Key',
-      details: 'Ensure your Security Key matches your Mobile Number or Roll Number.'
+      message: 'Invalid registration number or mobile number',
+      details: 'Use your registration number as username and mobile number as password.'
     });
 
   } catch (error) {
