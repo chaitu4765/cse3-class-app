@@ -61,7 +61,9 @@ const importStudents = async () => {
             if (existingStudent) {
               // Check if any data changed
               const nameChanged = existingStudent.name !== studentData.name;
-              const dobChanged = existingStudent.dob?.getTime() !== studentData.dob.getTime();
+              const existingDobTime = existingStudent.dob ? existingStudent.dob.getTime() : null;
+              const incomingDobTime = studentData.dob ? studentData.dob.getTime() : null;
+              const dobChanged = existingDobTime !== incomingDobTime;
               const emailChanged = existingStudent.email !== studentData.email;
               const mobileChanged = (existingStudent.mobileNumber || null) !== (studentData.mobileNumber || null);
 
