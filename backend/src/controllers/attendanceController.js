@@ -730,7 +730,7 @@ export const getAttendanceSummary = async (req, res) => {
       return res.status(400).json({ message: 'fromDate, toDate, and subject are required' });
     }
 
-    const students = await Student.findAll({ order: [['regNo', 'ASC']] });
+    const students = await Student.findAll({ order: [['regNo', 'ASC']], raw: true });
 
     // Find daily records in range
     const dailyQuery = {
@@ -758,6 +758,35 @@ export const getAttendanceSummary = async (req, res) => {
 
     const data = [];
 
+    const studentIds = students.map(student => student.id);
+    const attendanceWhere = { studentId: studentIds };
+    if (subject !== 'ALL') {
+      attendanceWhere.subject = subject;
+    }
+
+    const summaries = await Attendance.findAll({ where: attendanceWhere, raw: true });
+    const summaryMap = new Map();
+    summaries.forEach(summary => {
+      summaryMap.set(`${summary.studentId}|${summary.subject}`, summary);
+    });
+
+    const totalsBySubject = {};
+    const attendedByStudentSubject = new Map();
+
+    for (const dailyAttendance of dailyAttendances) {
+      const subj = dailyAttendance.subject;
+      totalsBySubject[subj] = (totalsBySubject[subj] || 0) + 1;
+
+      (dailyAttendance.records || []).forEach(record => {
+        if (String(record.status).toLowerCase() !== 'present') {
+          return;
+        }
+
+        const key = `${record.studentId}|${subj}`;
+        attendedByStudentSubject.set(key, (attendedByStudentSubject.get(key) || 0) + 1);
+      });
+    }
+
     if (subject === 'ALL') {
       for (const student of students) {
         const studentData = {
@@ -771,16 +800,9 @@ export const getAttendanceSummary = async (req, res) => {
         let totalAttendedAll = 0;
 
         for (const subj of ALLOWED_SUBJECTS) {
-          const subjectDays = dailyAttendances.filter(da => da.subject === subj);
-          const total = subjectDays.length;
-          let attended = 0;
-
-          subjectDays.forEach(da => {
-            const record = (da.records || []).find(r => String(r.studentId) === String(student.id));
-            if (record && String(record.status).toLowerCase() === 'present') attended++;
-          });
-
-          const summary = await Attendance.findOne({ where: { studentId: student.id, subject: subj } });
+          const total = totalsBySubject[subj] || 0;
+          const attended = attendedByStudentSubject.get(`${student.id}|${subj}`) || 0;
+          const summary = summaryMap.get(`${student.id}|${subj}`);
 
           studentData.subjects[subj] = {
             total,
@@ -802,17 +824,11 @@ export const getAttendanceSummary = async (req, res) => {
         data.push(studentData);
       }
     } else {
+      const total = totalsBySubject[subject] || 0;
+
       for (const student of students) {
-        const subjectDays = dailyAttendances.filter(da => da.subject === subject);
-        const total = subjectDays.length;
-        let attended = 0;
-
-        subjectDays.forEach(da => {
-          const record = (da.records || []).find(r => String(r.studentId) === String(student.id));
-          if (record && String(record.status).toLowerCase() === 'present') attended++;
-        });
-
-        const summary = await Attendance.findOne({ where: { studentId: student.id, subject } });
+        const attended = attendedByStudentSubject.get(`${student.id}|${subject}`) || 0;
+        const summary = summaryMap.get(`${student.id}|${subject}`);
 
         data.push({
           regNo: student.regNo,
