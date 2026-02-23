@@ -24,20 +24,38 @@ export const importStudentsFromCSV = async (req, res) => {
     let updatedCount = 0;
     let unchangedCount = 0;
 
+    const mapRowToStudent = (row) => {
+      const firstName = row['FIRST NAME:'] || row.FirstName || row.firstName;
+      const lastName = row['LAST NAME:'] || row.LastName || row.lastName;
+      const fullName = row.Name || row.name || [firstName, lastName].filter(Boolean).join(' ').trim();
+      const regNo = row.RegNo || row.regNo || row['REISTRATION NO:'];
+      const email = row.Email || row.email || row['PERSONAL MAIL ID:'];
+      const dobValue = row.DOB || row.dob;
+      const mobileNumber = row.MobileNumber || row.mobileNumber || row['MOBILE NUMBER:'];
+
+      if (!fullName || !regNo || !email) {
+        return null;
+      }
+
+      return {
+        name: String(fullName).trim(),
+        regNo: String(regNo).trim(),
+        dob: dobValue ? new Date(dobValue) : null,
+        email: String(email).trim(),
+        mobileNumber: mobileNumber ? String(mobileNumber).trim() : null
+      };
+    };
+
     // Read CSV and parse
     const stream = fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on('data', (row) => {
-        if (!row.Name || !row.RegNo || !row.DOB || !row.Email) {
+        const student = mapRowToStudent(row);
+        if (!student) {
           return;
         }
 
-        students.push({
-          name: row.Name.trim(),
-          regNo: row.RegNo.trim(),
-          dob: new Date(row.DOB),
-          email: row.Email.trim()
-        });
+        students.push(student);
       })
       .on('end', async () => {
         try {
@@ -51,11 +69,13 @@ export const importStudentsFromCSV = async (req, res) => {
               const nameChanged = existingStudent.name !== studentData.name;
               const dobChanged = existingStudent.dob?.getTime() !== studentData.dob.getTime();
               const emailChanged = existingStudent.email !== studentData.email;
+              const mobileChanged = (existingStudent.mobileNumber || null) !== (studentData.mobileNumber || null);
 
-              if (nameChanged || dobChanged || emailChanged) {
+              if (nameChanged || dobChanged || emailChanged || mobileChanged) {
                 existingStudent.name = studentData.name;
                 existingStudent.dob = studentData.dob;
                 existingStudent.email = studentData.email;
+                existingStudent.mobileNumber = studentData.mobileNumber;
                 await existingStudent.save();
                 updatedCount++;
               } else {
