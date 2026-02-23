@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js';
 import attendanceRoutes from './routes/attendanceRoutes.js';
 import announcementRoutes from './routes/announcementRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
+import migrationRoutes from './routes/migrationRoutes.js';
 
 // Import models to ensure they are registered for sync
 import Student from './models/Student.js';
@@ -56,6 +57,9 @@ app.use('/announcements', announcementRoutes);
 
 app.use('/api/students', studentRoutes);
 app.use('/students', studentRoutes);
+
+app.use('/api/migrate', migrationRoutes);
+app.use('/migrate', migrationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
