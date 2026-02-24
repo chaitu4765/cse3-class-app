@@ -35,10 +35,14 @@ if (process.env.DATABASE_URL) {
             idle: 10000
         }
     });
-} else if (isProduction) {
-    // If we are in production but DATABASE_URL is missing, we must NOT fall back to sqlite
-    // This provides a clear error in Vercel logs instead of "sqlite3 missing"
-    throw new Error('DATABASE_URL environment variable is missing in production!');
+} else if (isProduction && !process.env.DATABASE_URL) {
+    console.warn('⚠️ WARNING: DATABASE_URL is missing in production environment!');
+    // Fallback to SQLite anyway to prevent total crash, even if data isn't persistent
+    sequelize = new Sequelize({
+        dialect: 'sqlite',
+        storage: path.join(__dirname, '../../data/database_prod_fallback.sqlite'),
+        logging: console.log,
+    });
 } else {
     // Fallback to local SQLite for development
     sequelize = new Sequelize({

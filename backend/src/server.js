@@ -30,26 +30,27 @@ console.log('CR_EMAIL Present:', !!process.env.CR_EMAIL);
 console.log('------------------------------');
 
 // Middleware
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:5000',
-  'https://cse3-class-app.vercel.app',
-  'https://cse3-class-app-production.up.railway.app'
-];
-
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+
+    const isVercel = origin.endsWith('.vercel.app') || origin === 'https://cse3-class-app.vercel.app';
+    const isLocal = origin.startsWith('http://localhost:');
+    const isRailway = origin.endsWith('.up.railway.app');
+
+    if (isVercel || isLocal || isRailway) {
+      callback(null, true);
+    } else {
+      console.log('CORS Blocked for origin:', origin);
+      // Return null, false to block but not crash
+      callback(null, false);
     }
-    return callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200 // Some legacy browsers crash on 204
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
