@@ -30,8 +30,23 @@ console.log('CR_EMAIL Present:', !!process.env.CR_EMAIL);
 console.log('------------------------------');
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5000',
+  'https://cse3-class-app.vercel.app',
+  'https://cse3-class-app-production.up.railway.app'
+];
+
 app.use(cors({
-  origin: true, // Allow all origins for easier debugging (can be narrowed later)
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -42,6 +57,11 @@ app.use(express.urlencoded({ extended: true }));
 // Request logger
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  if (Object.keys(req.body).length > 0) {
+    const safeBody = { ...req.body };
+    if (safeBody.password) safeBody.password = '***';
+    console.log('Body:', safeBody);
+  }
   next();
 });
 

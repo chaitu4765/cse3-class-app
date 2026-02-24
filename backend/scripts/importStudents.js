@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import fs from "fs";
 import path from "path";
 import csv from "csv-parser";
@@ -37,18 +40,21 @@ const importStudents = async () => {
     console.log("SQLite connected and synced");
 
     console.log("\n📋 Reading CSV file...");
+    console.log(`📁 CSV Path: ${csvFilePath}`);
 
     fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on("data", (row) => {
         const student = mapRowToStudent(row);
         if (!student) {
+          console.log("⚠️  Skipping invalid row:", row);
           return;
         }
 
         students.push(student);
       })
       .on("end", async () => {
+        console.log(`\n✅ CSV parsing complete. Found ${students.length} students.`);
         try {
           let newCount = 0;
           let updatedCount = 0;
