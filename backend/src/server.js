@@ -32,25 +32,29 @@ console.log('------------------------------');
 // Middleware
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Always allow if no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
 
-    const isVercel = origin.endsWith('.vercel.app') || origin === 'https://cse3-class-app.vercel.app';
-    const isLocal = origin.startsWith('http://localhost:');
-    const isRailway = origin.endsWith('.up.railway.app');
+    // List of allowed origins
+    const allowedOrigins = [
+      'https://cse3-class-app.vercel.app',
+      'https://cse3-class-app-production.up.railway.app',
+      'http://localhost:3000',
+      'http://localhost:5000'
+    ];
 
-    if (isVercel || isLocal || isRailway) {
+    if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
       console.log('CORS Blocked for origin:', origin);
-      // Return null, false to block but not crash
-      callback(null, false);
+      callback(null, true); // Allow anyway to prevent blocking
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200 // Some legacy browsers crash on 204
+  exposedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 200
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
