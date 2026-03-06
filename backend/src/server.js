@@ -54,8 +54,13 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   exposedHeaders: ['Content-Type'],
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  maxAge: 3600
 }));
+
+// Handle CORS preflight requests explicitly
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
