@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-const withProtocol = rawBaseUrl.startsWith('http') ? rawBaseUrl : `https://${rawBaseUrl}`;
+const isProd = import.meta.env.PROD;
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || (isProd ? '/api' : 'http://localhost:5000/api');
+
+console.log('API Base URL:', rawBaseUrl);
+
+const withProtocol = rawBaseUrl.startsWith('http') || rawBaseUrl.startsWith('/') ? rawBaseUrl : `https://${rawBaseUrl}`;
 const normalizedBaseUrl = withProtocol.endsWith('/api')
   ? withProtocol
   : `${withProtocol.replace(/\/+$/, '')}/api`;
+
 
 const api = axios.create({
   baseURL: normalizedBaseUrl,
