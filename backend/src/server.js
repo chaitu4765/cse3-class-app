@@ -30,19 +30,25 @@ console.log('CR_EMAIL Present:', !!process.env.CR_EMAIL);
 console.log('------------------------------');
 
 // Middleware
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     // List of allowed origins
     const allowedOrigins = [
       'https://cse3-class-app.vercel.app',
       'https://cse3-class-app-production.up.railway.app',
+      'https://cse3-class-m0hpfgrpbc-chaitu4765s-projects.vercel.app', // From user screenshot
       'http://localhost:3000',
       'http://localhost:5000',
-      'http://localhost:5173' // Vite default
+      'http://localhost:5173'
     ];
 
-    // Always allow if no origin (like mobile apps or curl) or if it's in the allowed list
-    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+    // Check if origin is allowed
+    const isAllowed = !origin || 
+                     allowedOrigins.includes(origin) || 
+                     origin.endsWith('.vercel.app') || 
+                     origin.includes('vercel-build');
+
+    if (isAllowed) {
       callback(null, true);
     } else {
       console.log('CORS Blocked for origin:', origin);
@@ -51,14 +57,16 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'X-CSRF-Token'],
+  exposedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
-  maxAge: 86400 // Cache preflight for 24 hours
-}));
+  maxAge: 86400
+};
 
+app.use(cors(corsOptions));
+// Handle CORS preflight requests explicitly with the same options
+app.options('*', cors(corsOptions));
 
-// Handle CORS preflight requests explicitly
-app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
