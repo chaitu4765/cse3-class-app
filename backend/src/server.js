@@ -32,31 +32,30 @@ console.log('------------------------------');
 // Middleware
 app.use(cors({
   origin: function (origin, callback) {
-    // Always allow if no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-
     // List of allowed origins
     const allowedOrigins = [
       'https://cse3-class-app.vercel.app',
       'https://cse3-class-app-production.up.railway.app',
       'http://localhost:3000',
-      'http://localhost:5000'
+      'http://localhost:5000',
+      'http://localhost:5173' // Vite default
     ];
 
-    if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+    // Always allow if no origin (like mobile apps or curl) or if it's in the allowed list
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
       console.log('CORS Blocked for origin:', origin);
-      callback(null, true); // Allow anyway to prevent blocking
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   optionsSuccessStatus: 200,
-  maxAge: 3600
+  maxAge: 86400 // Cache preflight for 24 hours
 }));
+
 
 // Handle CORS preflight requests explicitly
 app.options('*', cors());
