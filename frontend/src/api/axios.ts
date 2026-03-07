@@ -3,13 +3,10 @@ import axios from 'axios';
 const isProd = import.meta.env.PROD;
 const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || (isProd ? '/api' : 'http://localhost:5000/api');
 
-console.log('API Base URL:', rawBaseUrl);
+// Ensure we don't have multiple /api or double slashes
+const normalizedBaseUrl = rawBaseUrl.replace(/\/+$/, '');
 
-const withProtocol = rawBaseUrl.startsWith('http') || rawBaseUrl.startsWith('/') ? rawBaseUrl : `https://${rawBaseUrl}`;
-const normalizedBaseUrl = withProtocol.endsWith('/api')
-  ? withProtocol
-  : `${withProtocol.replace(/\/+$/, '')}/api`;
-
+console.log('Final API Base URL:', normalizedBaseUrl);
 
 const api = axios.create({
   baseURL: normalizedBaseUrl,

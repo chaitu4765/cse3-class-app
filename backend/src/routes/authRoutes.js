@@ -17,7 +17,7 @@ router.post('/login', loginCR);
  * @access  Public
  */
 router.post('/unified-login', unifiedLogin);
-router.post('/unified_login', unifiedLogin);
+
 
 
 /**

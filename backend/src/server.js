@@ -21,24 +21,25 @@ import './models/Announcement.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 const corsOptions = {
   origin: function (origin, callback) {
     // List of explicitly allowed origins
     const allowedOrigins = [
       'https://cse3-class-app.vercel.app',
-      'https://cse3-class-app-production.up.railway.app'
+      'https://cse3-class-app-production.up.railway.app',
+      'https://cse3-class-1za0ezbd8-chaitu4765s-projects.vercel.app'
     ];
 
     // Allow if:
     // 1. No origin (mobile/curl)
     // 2. In allowed list
-    // 3. Any vercel.app subdomain
+    // 3. Any .vercel.app subdomain (glob/regex pattern support)
     // 4. Any localhost origin
     const isAllowed = !origin || 
                      allowedOrigins.includes(origin) || 
                      origin.endsWith('.vercel.app') || 
-                     origin.includes('localhost');
+                     origin.includes('localhost') ||
+                     /^https:\/\/cse3-class-.*\.vercel\.app$/.test(origin);
 
     if (isAllowed) {
       callback(null, true);
@@ -58,6 +59,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // Handle preflight for all routes
 app.options('*', cors(corsOptions));
+
 
 
 
