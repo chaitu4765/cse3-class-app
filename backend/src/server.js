@@ -21,32 +21,24 @@ import './models/Announcement.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Diagnostics
-console.log('--- Production Diagnostics ---');
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('DATABASE_URL Present:', !!process.env.DATABASE_URL);
-console.log('JWT_SECRET Present:', !!process.env.JWT_SECRET);
-console.log('CR_EMAIL Present:', !!process.env.CR_EMAIL);
-console.log('------------------------------');
-
 // Middleware
 const corsOptions = {
   origin: function (origin, callback) {
-    // List of allowed origins
+    // List of explicitly allowed origins
     const allowedOrigins = [
       'https://cse3-class-app.vercel.app',
-      'https://cse3-class-app-production.up.railway.app',
-      'https://cse3-class-m0hpfgrpbc-chaitu4765s-projects.vercel.app', // From user screenshot
-      'http://localhost:3000',
-      'http://localhost:5000',
-      'http://localhost:5173'
+      'https://cse3-class-app-production.up.railway.app'
     ];
 
-    // Check if origin is allowed
+    // Allow if:
+    // 1. No origin (mobile/curl)
+    // 2. In allowed list
+    // 3. Any vercel.app subdomain
+    // 4. Any localhost origin
     const isAllowed = !origin || 
                      allowedOrigins.includes(origin) || 
                      origin.endsWith('.vercel.app') || 
-                     origin.includes('vercel-build');
+                     origin.includes('localhost');
 
     if (isAllowed) {
       callback(null, true);
@@ -57,15 +49,16 @@ const corsOptions = {
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'X-CSRF-Token'],
-  exposedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   optionsSuccessStatus: 200,
   maxAge: 86400
 };
 
+// Apply CORS to all routes
 app.use(cors(corsOptions));
-// Handle CORS preflight requests explicitly with the same options
+// Handle preflight for all routes
 app.options('*', cors(corsOptions));
+
 
 
 app.use(express.json());
