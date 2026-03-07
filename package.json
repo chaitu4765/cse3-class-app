@@ -2,9 +2,13 @@
     "name": "cse3-class-app-monorepo",
     "version": "1.0.0",
     "private": true,
+    "workspaces": [
+        "frontend",
+        "backend"
+    ],
     "scripts": {
-        "start": "cd backend && npm install && npm start",
-        "build": "cd frontend && npm install && npm run build",
-        "vercel-build": "cd frontend && npm install && npm run build"
+        "start": "npm start -w backend",
+        "build": "npm run build -w frontend",
+        "vercel-build": "npm run build -w frontend"
     }
 }
