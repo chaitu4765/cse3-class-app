@@ -12,11 +12,11 @@ const router = express.Router();
 router.post('/login', loginCR);
 
 /**
- * @route   POST /api/auth/unified-login
+ * @route   POST /api/auth/unified_login
  * @desc    Unified login for Admin and Student
  * @access  Public
  */
-router.post('/unified-login', unifiedLogin);
+router.post('/unified_login', unifiedLogin);
 
 
 
