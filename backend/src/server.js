@@ -22,32 +22,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    // List of explicitly allowed origins
-    const allowedOrigins = [
-      'https://cse3-class-app.vercel.app',
-      'https://cse3-class-app-production.up.railway.app',
-      'https://cse3-class-1za0ezbd8-chaitu4765s-projects.vercel.app'
-    ];
-
-    // Allow if:
-    // 1. No origin (mobile/curl)
-    // 2. In allowed list
-    // 3. Any .vercel.app subdomain (glob/regex pattern support)
-    // 4. Any localhost origin
-    const isAllowed = !origin || 
-                     allowedOrigins.includes(origin) || 
-                     origin.endsWith('.vercel.app') || 
-                     origin.includes('localhost') ||
-                     /^https:\/\/cse3-class-.*\.vercel\.app$/.test(origin);
-
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      console.log('CORS Blocked for origin:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  // Reflects the request origin. This allows all origins while supporting credentials.
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],

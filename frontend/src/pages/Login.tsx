@@ -22,7 +22,7 @@ const Login = () => {
         }
         setLoading(true);
         try {
-            const response = await api.post('/auth/unified-login', {
+            const response = await api.post('/auth/unified_login', {
                 identifier: identifier.trim(),
                 password: password.trim()
             });
