@@ -24,11 +24,22 @@ if (admin.apps.length === 0) {
 
     if (projectId && clientEmail && privateKey) {
       console.log('🔥 Initializing Firebase Admin SDK via Environment Variables...');
+      
+      let formattedKey = privateKey.trim();
+      // Remove surrounding double quotes if present
+      if (formattedKey.startsWith('"') && formattedKey.endsWith('"')) {
+        formattedKey = formattedKey.slice(1, -1);
+      }
+      // Remove surrounding single quotes if present
+      if (formattedKey.startsWith("'") && formattedKey.endsWith("'")) {
+        formattedKey = formattedKey.slice(1, -1);
+      }
+      
       app = admin.initializeApp({
         credential: admin.credential.cert({
           projectId: projectId,
           clientEmail: clientEmail,
-          privateKey: privateKey.replace(/\\n/g, '\n'),
+          privateKey: formattedKey.replace(/\\n/g, '\n'),
         })
       });
     } else {
