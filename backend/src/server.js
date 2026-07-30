@@ -3,26 +3,18 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
-import sequelize from './config/database.js';
+import db from './config/firebase.js';
 import authRoutes from './routes/authRoutes.js';
 import attendanceRoutes from './routes/attendanceRoutes.js';
 import announcementRoutes from './routes/announcementRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import migrationRoutes from './routes/migrationRoutes.js';
-
-// Import models to ensure they are registered for sync
-import Student from './models/Student.js';
-import './models/Attendance.js';
-import './models/AttendanceRecord.js';
-import './models/DailyAttendance.js';
-import './models/DailyAttendanceRecord.js';
-import './models/Announcement.js';
+import leaveRoutes from './routes/leaveRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  // Reflects the request origin. This allows all origins while supporting credentials.
   origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -35,9 +27,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // Handle preflight for all routes
 app.options('*', cors(corsOptions));
-
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -69,23 +58,37 @@ app.use('/students', studentRoutes);
 app.use('/api/migrate', migrationRoutes);
 app.use('/migrate', migrationRoutes);
 
+app.use('/api/leaves', leaveRoutes);
+app.use('/leaves', leaveRoutes);
+
 // Health check
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    database: process.env.DATABASE_URL ? 'Postgres' : 'SQLite',
-    env: process.env.NODE_ENV
-  });
+app.get('/api/health', async (req, res) => {
+  try {
+    // Check Firestore connection
+    await db.collection('students').limit(1).get();
+    res.json({
+      status: 'ok',
+      database: 'Firestore',
+      env: process.env.NODE_ENV
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      database: 'Firestore Connection Failed',
+      error: error.message
+    });
+  }
 });
 
-// Debug DB - Check student count
+// Debug DB - Check student count in Firestore
 app.get('/api/debug-db', async (req, res) => {
   try {
-    const count = await Student.count();
+    const countSnapshot = await db.collection('students').count().get();
+    const count = countSnapshot.data().count;
     res.json({
       status: 'connected',
       studentCount: count,
-      database: process.env.DATABASE_URL ? 'Postgres' : 'SQLite'
+      database: 'Firestore'
     });
   } catch (error) {
     res.status(500).json({
@@ -97,32 +100,17 @@ app.get('/api/debug-db', async (req, res) => {
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'Class Management Backend API is running',
-    database: process.env.DATABASE_URL ? 'Connected (Postgres)' : 'Connected (SQLite)'
+    message: 'Class Management Backend API is running on Firebase Firestore',
+    database: 'Connected (Firestore)'
   });
 });
 
 // For Vercel, we export the app
 export default app;
 
-// Only start the server if we're not running as a Vercel serverless function
+// Only start the server if we're not running as a Vercel serverless function or Firebase Function
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  console.log('🔄 Attempting to sync database...');
-  sequelize.sync({ force: false })
-    .then(() => {
-      console.log('✅ Database synced successfully');
-      app.listen(PORT, () => {
-        console.log(`🚀 Server is running on port ${PORT}`);
-      });
-    })
-    .catch((err) => {
-      console.error('❌ Database Sync Error:', err.message);
-      if (err.parent) console.error('  Parent Error:', err.parent.message);
-      console.error('  Dialect:', sequelize.getDialect());
-      if (process.env.DATABASE_URL) {
-        console.error('  DATABASE_URL is present');
-      } else {
-        console.error('  DATABASE_URL is missing! Falling back to SQLite.');
-      }
-    });
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running locally on port ${PORT}`);
+  });
 }

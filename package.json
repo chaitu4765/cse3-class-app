@@ -10,5 +10,8 @@
         "start": "npm start -w backend",
         "build": "npm run build -w frontend",
         "vercel-build": "npm run build -w frontend"
+    },
+    "dependencies": {
+        "cors": "^2.8.6"
     }
 }

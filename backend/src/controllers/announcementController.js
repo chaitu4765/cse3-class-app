@@ -1,4 +1,4 @@
-import Announcement from '../models/Announcement.js';
+import db from '../config/firebase.js';
 
 /**
  * Create Announcement Controller
@@ -16,7 +16,6 @@ export const createAnnouncement = async (req, res) => {
       });
     }
 
-    // Validate title and message lengths
     if (title.trim().length === 0) {
       return res.status(400).json({
         message: 'Title cannot be empty'
@@ -29,26 +28,29 @@ export const createAnnouncement = async (req, res) => {
       });
     }
 
-    // Create new announcement
-    const announcement = await Announcement.create({
+    // Create doc ref to get ID
+    const newDocRef = db.collection('announcements').doc();
+    const now = new Date().toISOString();
+
+    const announcementData = {
+      id: newDocRef.id,
       title: title.trim(),
-      message: message.trim()
-    });
+      message: message.trim(),
+      createdAt: now,
+      updatedAt: now
+    };
+
+    await newDocRef.set(announcementData);
 
     res.status(201).json({
       message: 'Announcement created successfully',
-      announcement: {
-        id: announcement.id,
-        title: announcement.title,
-        message: announcement.message,
-        createdAt: announcement.createdAt
-      }
+      announcement: announcementData
     });
 
   } catch (error) {
     console.error('Create announcement error:', error);
     res.status(500).json({
-      message: 'Server error while creating announcement'
+      message: 'Server error while creating announcement in Firestore'
     });
   }
 };
@@ -60,11 +62,22 @@ export const createAnnouncement = async (req, res) => {
  */
 export const getAnnouncements = async (req, res) => {
   try {
-    // Fetch all announcements, sorted by newest first
-    const announcements = await Announcement.findAll({
-      order: [['createdAt', 'DESC']],
-      attributes: ['id', 'title', 'message', 'createdAt'],
-      raw: true,
+    const announcementsSnapshot = await db.collection('announcements').get();
+    
+    const announcements = [];
+    announcementsSnapshot.forEach(doc => {
+      const data = doc.data();
+      announcements.push({
+        id: data.id || doc.id,
+        title: data.title,
+        message: data.message,
+        createdAt: data.createdAt
+      });
+    });
+
+    // Sort by createdAt descending
+    announcements.sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
     res.status(200).json({
@@ -75,7 +88,7 @@ export const getAnnouncements = async (req, res) => {
   } catch (error) {
     console.error('Get announcements error:', error);
     res.status(500).json({
-      message: 'Server error while fetching announcements'
+      message: 'Server error while fetching announcements from Firestore'
     });
   }
 };
@@ -95,16 +108,16 @@ export const deleteAnnouncement = async (req, res) => {
       });
     }
 
-    // Find and delete the announcement
-    const deletedCount = await Announcement.destroy({
-      where: { id }
-    });
+    const docRef = db.collection('announcements').doc(id);
+    const docSnapshot = await docRef.get();
 
-    if (deletedCount === 0) {
+    if (!docSnapshot.exists) {
       return res.status(404).json({
         message: 'Announcement not found'
       });
     }
+
+    await docRef.delete();
 
     res.status(200).json({
       message: 'Announcement deleted successfully'
@@ -113,7 +126,7 @@ export const deleteAnnouncement = async (req, res) => {
   } catch (error) {
     console.error('Delete announcement error:', error);
     res.status(500).json({
-      message: 'Server error while deleting announcement'
+      message: 'Server error while deleting announcement in Firestore'
     });
   }
 };

@@ -2,12 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
 import { fileURLToPath } from 'url';
-import Student from '../models/Student.js';
+import db from '../config/firebase.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
- * Import students from CSV file
+ * Import students from CSV file into Firestore
  */
 export const importStudentsFromCSV = async (req, res) => {
   try {
@@ -39,52 +39,64 @@ export const importStudentsFromCSV = async (req, res) => {
 
       return {
         name: String(fullName).trim(),
-        regNo: String(regNo).trim(),
-        dob: dobValue ? new Date(dobValue) : null,
+        regNo: String(regNo).trim().toUpperCase(),
+        dob: dobValue ? new Date(dobValue).toISOString() : null,
         email: String(email).trim(),
         mobileNumber: mobileNumber ? String(mobileNumber).trim() : null
       };
     };
 
     // Read CSV and parse
-    const stream = fs.createReadStream(csvFilePath)
+    fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on('data', (row) => {
         const student = mapRowToStudent(row);
-        if (!student) {
-          return;
+        if (student) {
+          students.push(student);
         }
-
-        students.push(student);
       })
       .on('end', async () => {
         try {
-          // Process each student
-          for (const studentData of students) {
-            const existingStudent = await Student.findOne({ 
-              where: { regNo: studentData.regNo } 
-            });
+          const now = new Date().toISOString();
 
-            if (existingStudent) {
+          // Process each student in Firestore
+          for (const studentData of students) {
+            // Find student by regNo
+            const studentQuerySnap = await db.collection('students')
+              .where('regNo', '==', studentData.regNo)
+              .limit(1)
+              .get();
+
+            if (!studentQuerySnap.empty) {
+              const studentDoc = studentQuerySnap.docs[0];
+              const existingStudent = studentDoc.data();
+
               const nameChanged = existingStudent.name !== studentData.name;
-              const existingDobTime = existingStudent.dob ? existingStudent.dob.getTime() : null;
-              const incomingDobTime = studentData.dob ? studentData.dob.getTime() : null;
-              const dobChanged = existingDobTime !== incomingDobTime;
+              const dobChanged = existingStudent.dob !== studentData.dob;
               const emailChanged = existingStudent.email !== studentData.email;
               const mobileChanged = (existingStudent.mobileNumber || null) !== (studentData.mobileNumber || null);
 
               if (nameChanged || dobChanged || emailChanged || mobileChanged) {
-                existingStudent.name = studentData.name;
-                existingStudent.dob = studentData.dob;
-                existingStudent.email = studentData.email;
-                existingStudent.mobileNumber = studentData.mobileNumber;
-                await existingStudent.save();
+                await studentDoc.ref.update({
+                  name: studentData.name,
+                  dob: studentData.dob,
+                  email: studentData.email,
+                  mobileNumber: studentData.mobileNumber,
+                  updatedAt: now
+                });
                 updatedCount++;
               } else {
                 unchangedCount++;
               }
             } else {
-              await Student.create(studentData);
+              // Create a new student doc
+              const newDocRef = db.collection('students').doc();
+              await newDocRef.set({
+                id: newDocRef.id,
+                ...studentData,
+                createdAt: now,
+                updatedAt: now
+              });
               newCount++;
             }
           }
@@ -101,7 +113,7 @@ export const importStudentsFromCSV = async (req, res) => {
         } catch (error) {
           console.error('Import error:', error);
           res.status(500).json({
-            message: 'Error importing students',
+            message: 'Error importing students to Firestore',
             error: error.message
           });
         }

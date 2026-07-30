@@ -1,2 +1,7 @@
 .vercel
-.env*.local
+serviceAccountKey.json
+
+# Ignore all environment configurations to prevent leaking secrets
+*.env*
+.env
+.env.*

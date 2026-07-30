@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import db from '../config/firebase.js';
 
 /**
  * CR Login Controller
@@ -69,8 +70,6 @@ export const loginCR = async (req, res) => {
   }
 };
 
-import Student from '../models/Student.js';
-
 /**
  * Unified Login Controller
  * Handles both CR (Admin) and Student login
@@ -114,11 +113,17 @@ export const unifiedLogin = async (req, res) => {
       }
     }
 
-    // 2. Try Student Login (RegNo + Mobile Number)
+    // 2. Try Student Login (RegNo + Mobile Number) via Firestore
     const normalizedRegNo = identifier.trim().toUpperCase();
-    const student = await Student.findOne({ where: { regNo: normalizedRegNo } });
+    const studentsSnapshot = await db.collection('students')
+      .where('regNo', '==', normalizedRegNo)
+      .limit(1)
+      .get();
 
-    if (student) {
+    if (!studentsSnapshot.empty) {
+      const studentDoc = studentsSnapshot.docs[0];
+      const student = { id: studentDoc.id, ...studentDoc.data() };
+      
       const passwordTrimmed = password.trim();
       const mobileStored = student.mobileNumber?.trim();
 
@@ -165,16 +170,8 @@ export const unifiedLogin = async (req, res) => {
   } catch (error) {
     console.error('🔥 CRITICAL AUTH ERROR:', error);
 
-    // Check for specific database errors
-    let errorMessage = 'Server error during login.';
-    if (error.name === 'SequelizeConnectionError') {
-      errorMessage = 'Database connection failed. Please check your Supabase link.';
-    } else if (error.name === 'SequelizeDatabaseError') {
-      errorMessage = 'Database table not found. Did you run the seed command?';
-    }
-
     res.status(500).json({
-      message: errorMessage,
+      message: 'Server error during login. Check Firebase connection.',
       error_type: error.name,
       debug_info: error.message.substring(0, 50)
     });

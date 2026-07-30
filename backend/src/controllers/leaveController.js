@@ -1,5 +1,4 @@
-import LeaveRequest from '../models/LeaveRequest.js';
-import Student from '../models/Student.js';
+import db from '../config/firebase.js';
 
 /**
  * Create Leave Request Controller
@@ -31,51 +30,59 @@ export const createLeaveRequest = async (req, res) => {
       return res.status(400).json({ message: 'Reason is required' });
     }
 
-    // Find student
-    console.log('Searching for student with regNo:', regNo);
+    // Find student in Firestore
+    console.log('Searching for student with regNo in Firestore:', regNo);
     const normalizedRegNo = regNo.trim().toUpperCase();
-    const student = await Student.findOne({ where: { regNo: normalizedRegNo } });
+    const studentsSnapshot = await db.collection('students')
+      .where('regNo', '==', normalizedRegNo)
+      .limit(1)
+      .get();
 
-    if (!student) {
+    if (studentsSnapshot.empty) {
       console.error('Student not found');
       return res.status(404).json({ message: 'Student not found with registration number: ' + regNo });
     }
 
+    const studentDoc = studentsSnapshot.docs[0];
+    const student = { id: studentDoc.id, ...studentDoc.data() };
+
     console.log('Found student:', student.name, student.id);
 
-    // Parse dates
-    const startDateObj = new Date(startDate);
-    const endDateObj = new Date(endDate);
-
-    console.log('Parsed dates:', { start: startDateObj, end: endDateObj });
+    const now = new Date().toISOString();
+    const newDocRef = db.collection('leave_requests').doc();
 
     // Create leave request object
     const leaveData = {
+      id: newDocRef.id,
       studentId: student.id,
       studentName: student.name,
       regNo: student.regNo,
-      startDate: startDateObj,
-      endDate: endDateObj,
+      startDate: new Date(startDate).toISOString(),
+      endDate: new Date(endDate).toISOString(),
       reason: reason.trim(),
-      status: 'Pending'
+      status: 'Pending',
+      reviewedAt: null,
+      reviewedBy: 'CR',
+      createdAt: now,
+      updatedAt: now
     };
 
-    console.log('Creating leave request with data:', leaveData);
+    console.log('Creating leave request with data in Firestore:', leaveData);
 
-    const leaveRequest = await LeaveRequest.create(leaveData);
+    await newDocRef.set(leaveData);
 
-    console.log('✅ SUCCESS! Saved leave request:', leaveRequest.id);
+    console.log('✅ SUCCESS! Saved leave request:', newDocRef.id);
 
     return res.status(201).json({
       message: 'Leave request submitted successfully',
       leaveRequest: {
-        id: leaveRequest.id,
-        studentName: leaveRequest.studentName,
-        regNo: leaveRequest.regNo,
-        startDate: leaveRequest.startDate,
-        endDate: leaveRequest.endDate,
-        reason: leaveRequest.reason,
-        status: leaveRequest.status
+        id: leaveData.id,
+        studentName: leaveData.studentName,
+        regNo: leaveData.regNo,
+        startDate: leaveData.startDate,
+        endDate: leaveData.endDate,
+        reason: leaveData.reason,
+        status: leaveData.status
       }
     });
 
@@ -95,7 +102,7 @@ export const createLeaveRequest = async (req, res) => {
 /**
  * Get Leave Requests Controller
  * Retrieves all leave requests (CR) or student's own requests (Students)
- * Access: Public for students (with regNo + DOB), CR gets all
+ * Access: Public for students (with regNo + Password), CR gets all
  */
 export const getLeaveRequests = async (req, res) => {
   try {
@@ -105,16 +112,22 @@ export const getLeaveRequests = async (req, res) => {
     if (regNo && password) {
       const normalizedRegNo = regNo.trim().toUpperCase();
 
-      // Validate student
-      const student = await Student.findOne({ where: { regNo: normalizedRegNo } });
+      // Find student in Firestore
+      const studentsSnapshot = await db.collection('students')
+        .where('regNo', '==', normalizedRegNo)
+        .limit(1)
+        .get();
 
-      if (!student) {
+      if (studentsSnapshot.empty) {
         return res.status(401).json({
           message: 'Invalid credentials'
         });
       }
 
-      // Compare password with mobileNumber (New Requirement)
+      const studentDoc = studentsSnapshot.docs[0];
+      const student = { id: studentDoc.id, ...studentDoc.data() };
+
+      // Compare password with mobileNumber
       // Fallback to regNo if mobileNumber isn't set
       const validPassword = student.mobileNumber ?
         password.trim() === student.mobileNumber.trim() :
@@ -126,13 +139,29 @@ export const getLeaveRequests = async (req, res) => {
         });
       }
 
-      // Fetch student's leave requests
-      const leaveRequests = await LeaveRequest.findAll({
-        where: { studentId: student.id },
-        order: [['createdAt', 'DESC']],
-        attributes: ['id', 'studentName', 'regNo', 'startDate', 'endDate', 'reason', 'status', 'createdAt', 'reviewedAt'],
-        raw: true,
+      // Fetch student's leave requests from Firestore
+      const leaveSnapshot = await db.collection('leave_requests')
+        .where('studentId', '==', student.id)
+        .get();
+
+      const leaveRequests = [];
+      leaveSnapshot.forEach(doc => {
+        const data = doc.data();
+        leaveRequests.push({
+          id: data.id || doc.id,
+          studentName: data.studentName,
+          regNo: data.regNo,
+          startDate: data.startDate,
+          endDate: data.endDate,
+          reason: data.reason,
+          status: data.status,
+          createdAt: data.createdAt,
+          reviewedAt: data.reviewedAt
+        });
       });
+
+      // Sort by createdAt desc
+      leaveRequests.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
       return res.status(200).json({
         count: leaveRequests.length,
@@ -141,11 +170,25 @@ export const getLeaveRequests = async (req, res) => {
     }
 
     // Otherwise, return all leave requests (for CR)
-    const leaveRequests = await LeaveRequest.findAll({
-      order: [['createdAt', 'DESC']],
-      attributes: ['id', 'studentName', 'regNo', 'startDate', 'endDate', 'reason', 'status', 'createdAt', 'reviewedAt'],
-      raw: true,
+    const leaveSnapshot = await db.collection('leave_requests').get();
+    const leaveRequests = [];
+    leaveSnapshot.forEach(doc => {
+      const data = doc.data();
+      leaveRequests.push({
+        id: data.id || doc.id,
+        studentName: data.studentName,
+        regNo: data.regNo,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        reason: data.reason,
+        status: data.status,
+        createdAt: data.createdAt,
+        reviewedAt: data.reviewedAt
+      });
     });
+
+    // Sort by createdAt desc
+    leaveRequests.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     res.status(200).json({
       count: leaveRequests.length,
@@ -155,7 +198,7 @@ export const getLeaveRequests = async (req, res) => {
   } catch (error) {
     console.error('Get leave requests error:', error);
     res.status(500).json({
-      message: 'Server error while fetching leave requests'
+      message: 'Server error while fetching leave requests from Firestore'
     });
   }
 };
@@ -182,14 +225,17 @@ export const updateLeaveStatus = async (req, res) => {
       });
     }
 
-    // Find and update the leave request
-    const leaveRequest = await LeaveRequest.findByPk(id);
+    // Find and update the leave request in Firestore
+    const docRef = db.collection('leave_requests').doc(id);
+    const docSnapshot = await docRef.get();
 
-    if (!leaveRequest) {
+    if (!docSnapshot.exists) {
       return res.status(404).json({
         message: 'Leave request not found'
       });
     }
+
+    const leaveRequest = docSnapshot.data();
 
     if (leaveRequest.status !== 'Pending') {
       return res.status(400).json({
@@ -197,28 +243,31 @@ export const updateLeaveStatus = async (req, res) => {
       });
     }
 
-    leaveRequest.status = status;
-    leaveRequest.reviewedAt = new Date();
-    await leaveRequest.save();
+    const now = new Date().toISOString();
+    await docRef.update({
+      status: status,
+      reviewedAt: now,
+      updatedAt: now
+    });
 
     res.status(200).json({
       message: `Leave request ${status.toLowerCase()} successfully`,
       leaveRequest: {
-        id: leaveRequest.id,
+        id: id,
         studentName: leaveRequest.studentName,
         regNo: leaveRequest.regNo,
         startDate: leaveRequest.startDate,
         endDate: leaveRequest.endDate,
         reason: leaveRequest.reason,
-        status: leaveRequest.status,
-        reviewedAt: leaveRequest.reviewedAt
+        status: status,
+        reviewedAt: now
       }
     });
 
   } catch (error) {
     console.error('Update leave status error:', error);
     res.status(500).json({
-      message: 'Server error while updating leave status'
+      message: 'Server error while updating leave status in Firestore'
     });
   }
 };
@@ -238,15 +287,16 @@ export const deleteLeaveRequest = async (req, res) => {
       });
     }
 
-    const deletedCount = await LeaveRequest.destroy({
-      where: { id }
-    });
+    const docRef = db.collection('leave_requests').doc(id);
+    const docSnapshot = await docRef.get();
 
-    if (deletedCount === 0) {
+    if (!docSnapshot.exists) {
       return res.status(404).json({
         message: 'Leave request not found'
       });
     }
+
+    await docRef.delete();
 
     res.status(200).json({
       message: 'Leave request deleted successfully'
@@ -255,7 +305,7 @@ export const deleteLeaveRequest = async (req, res) => {
   } catch (error) {
     console.error('Delete leave request error:', error);
     res.status(500).json({
-      message: 'Server error while deleting leave request'
+      message: 'Server error while deleting leave request in Firestore'
     });
   }
 };
@@ -269,20 +319,35 @@ export const resetAllLeaves = async (req, res) => {
   try {
     console.log('\n=== RESETTING ALL LEAVE REQUESTS ===');
 
-    // Delete all leave requests
-    const deletedCount = await LeaveRequest.destroy({ where: {} });
+    const leaveSnapshot = await db.collection('leave_requests').get();
+    const totalCount = leaveSnapshot.size;
 
-    console.log(`✅ Deleted ${deletedCount} leave requests`);
+    if (totalCount === 0) {
+      return res.status(200).json({
+        message: 'No leave requests to delete',
+        deleted: 0
+      });
+    }
+
+    // Delete in batches of 500 (Firestore transaction/batch limit is 500)
+    const batch = db.batch();
+    leaveSnapshot.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+    
+    await batch.commit();
+
+    console.log(`✅ Deleted ${totalCount} leave requests`);
 
     res.status(200).json({
       message: 'All leave requests have been deleted successfully',
-      deleted: deletedCount
+      deleted: totalCount
     });
 
   } catch (error) {
     console.error('❌ Reset all leaves error:', error);
     res.status(500).json({
-      message: 'Server error while resetting leave requests',
+      message: 'Server error while resetting leave requests in Firestore',
       error: error.message
     });
   }
